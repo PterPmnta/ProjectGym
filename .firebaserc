@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "projectgym-8ecbc": {
+      "hosting": {
+        "ProjectGym": [
+          "projectgym-8ecbc"
+        ]
+      }
+    }
+  }
+}
