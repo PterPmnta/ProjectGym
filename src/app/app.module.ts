@@ -12,12 +12,15 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { LoginComponent } from './Login/Login.component';
 
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [	
+    AppComponent,
+      LoginComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,7 +28,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     AccordionModule.forRoot(),
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

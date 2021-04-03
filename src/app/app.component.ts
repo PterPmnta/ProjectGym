@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth'
 import * as firebase from 'firebase';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,10 +13,19 @@ import * as firebase from 'firebase';
 export class AppComponent {
 
   title = 'ProjectGym';  
+  loading: boolean = true  
 
-  constructor(firestore: AngularFirestore, public auth: AngularFireAuth) {
+  constructor(firestore: AngularFirestore, public auth: AngularFireAuth, public spinner: NgxSpinnerService) {
+
+    this.spinner.show();
+    
     this.auth.user.subscribe((usuario) => {
-      console.log(usuario)
+
+      setTimeout(() => {
+        this.loading = false
+        this.spinner.hide();
+      }, 3000);
+      
     })
   }  
 
