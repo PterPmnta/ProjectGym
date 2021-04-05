@@ -1,3 +1,20 @@
-<p>
-  Login works!
-</p>
+<div class="mb-3 align-middle" style="height: 100%; width: 100%;">
+
+  <div class="d-flex justify-content-center mt-3">
+    <img src = {{imgLogin}} style="width: 150px; height: 150px;" alt="loginImage">
+  </div>
+
+  <form [formGroup]="loginForm">
+
+    <div class="justify-content-center">
+      <input type="email" class="form-control align-middle mt-3" id="email" formControlName = "email" placeholder="Ingrese su correo">
+      <input type="password" class="form-control mt-3" id="password" formControlName = "password" placeholder="*********">      
+    </div>
+
+    <button class="btn btn-primary form-control mt-3" [disabled]="!loginForm.valid">Ingresar!</button>
+
+  </form>
+
+  
+  
+</div>
