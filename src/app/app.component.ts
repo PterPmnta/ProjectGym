@@ -24,7 +24,7 @@ export class AppComponent {
       setTimeout(() => {
         this.loading = false
         this.spinner.hide();
-      }, 3000);
+      }, 1000);
       
     })
   }  

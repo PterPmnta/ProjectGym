@@ -4,17 +4,28 @@
     <img src = {{imgLogin}} style="width: 150px; height: 150px;" alt="loginImage">
   </div>
 
-  <form [formGroup]="loginForm">
+  <form [formGroup]="loginForm" class="justify-content-center">
 
-    <div class="justify-content-center">
-      <input type="email" class="form-control align-middle mt-3" id="email" formControlName = "email" placeholder="Ingrese su correo">
-      <input type="password" class="form-control mt-3" id="password" formControlName = "password" placeholder="*********">      
+    <div class = "form-group">
+      <input type = "email" class = "form-control align-middle mt-3" id="email" formControlName = "email" placeholder = "Ingrese su correo">
+      <div *ngIf = "loginForm.controls['email'].invalid && loginForm.controls['email'].dirty" class="alert alert-danger mt-2" role="alert">
+        <span *ngIf = "loginForm.controls['email'].errors?.required">Correo requerido</span>
+        <span *ngIf = "loginForm.controls['email'].errors?.email">Correo no valido</span>
+      </div>            
     </div>
 
-    <button class="btn btn-primary form-control mt-3" [disabled]="!loginForm.valid">Ingresar!</button>
+    <div class = "form-group">
+      <input type = "password" class = "form-control mt-3" id = "password" formControlName = "password" placeholder = "*********" (keyUp.enter) = "logIn()">
+      <div *ngIf = "loginForm.controls['password'].invalid && loginForm.controls['password'].dirty" class = "alert alert-danger mt-2" role = "alert">
+        <span *ngIf = "loginForm.controls['password'].errors?.required">Contraseña requerida</span>
+      </div>
+    </div>
 
-  </form>
+    <button (click) = "logIn()" class="btn btn-primary form-control mt-3" [disabled]="!loginForm.valid">Ingresar!</button>
+    <div class="alert alert-warning mt-3" role="alert" *ngIf = "!dataInForm">
+      {{ errorText }}
+    </div>
 
-  
+  </form>  
   
 </div>

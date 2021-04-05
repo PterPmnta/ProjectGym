@@ -15,6 +15,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './Login/Login.component';
 
 import { NgxSpinnerModule } from "ngx-spinner";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [	
@@ -29,7 +30,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
