@@ -1,4 +1,4 @@
-<div class="mb-3 align-middle" style="height: 100%; width: 100%;">
+<div class="mb-3 align-middle" style="height: 100%; width: 100%;" class="container">
 
   <div class="d-flex justify-content-center mt-3">
     <img src = {{imgLogin}} style="width: 150px; height: 150px;" alt="loginImage">
@@ -21,11 +21,23 @@
       </div>
     </div>
 
-    <button (click) = "logIn()" class="btn btn-primary form-control mt-3" [disabled]="!loginForm.valid">Ingresar!</button>
-    <div class="alert alert-warning mt-3" role="alert" *ngIf = "!dataInForm">
-      {{ errorText }}
-    </div>
+    <button (click) = "logIn()" class="btn btn-primary form-control mt-3" [disabled]="!loginForm.valid">Ingresar!</button>    
 
   </form>  
+
+  <div class="alert alert-warning mt-3" role="alert" *ngIf = "!dataInForm">
+    {{ errorText }}
+  </div>
+
+ 
+    <ngx-spinner
+      bdColor = "rgba(175,165,157,0.8)" 
+      size = "large" color = "#69a7e1" 
+      type = "ball-scale-multiple" 
+      [fullScreen] = "true">
+      <p style="color: white">
+        {{ Do_A_Post }}
+      </p>
+    </ngx-spinner>
   
 </div>
