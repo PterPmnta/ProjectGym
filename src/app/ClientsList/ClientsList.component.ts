@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-ClientsList',
@@ -8,10 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class ClientsListComponent implements OnInit {
 
   imageProfile: string = "../../assets/img/profilemale1.png"
+  clientsList: any[] = []
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore) { }
 
   ngOnInit() {
+    this.firestore.collection('clients').valueChanges().subscribe((list) => {
+      console.log(list)
+      this.clientsList = list
+    })
   }
 
   searchClients(event: any){

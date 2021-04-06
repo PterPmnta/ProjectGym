@@ -6,68 +6,23 @@
     <input class="form-control" placeholder="Search a client" type="text" (input)="searchClients($event)" >
   </form>
 
-  <div class="row justify-content-">
+  <div class="row justify-content-between">
 
-    <div class="col-md-auto col-sm-6 mt-3">
+    <div class="col-md-auto col-sm-6 mt-3" *ngFor = "let client of clientsList">
       <div class="card" style="width: 18rem;">
         <div class="align-self-center">
-          <img src= {{imageProfile}} class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
+          <img [src] = "client.Imagen" class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
         </div>        
         <div class="card-body">
-          <h5 class="card-title">User Name</h5>
-          <p class="card-text">Data</p>
+          <h5 class="card-title"> {{ client.Nombre }} {{ client.Apellido }} </h5>
+          <h4 class="card-text"> {{client.Cedula}} </h4>
+          <p class="card-text"> {{ client.Telefono }} </p>
+          <p class="card-text"> {{ client.email }} </p>
+          <p class="card-text"> {{ client.Fecha_N }} </p>
         </div>
         <div class="card-body align-self-center">
           <a href="#" class="card-link">Edit</a>
           <a href="#" class="card-link text-danger">Disabled</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-auto col-sm-6 mt-3">
-      <div class="card" style="width: 18rem;">
-        <div class="align-self-center">
-          <img src= {{imageProfile}} class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
-        </div>        
-        <div class="card-body">
-          <h5 class="card-title">User Name</h5>
-          <p class="card-text">Data</p>
-        </div>
-        <div class="card-body align-self-center">
-          <a href="#" class="card-link">Edit</a>
-          <a href="#" class="card-link text-danger">Disabled</a>
-        </div>
-      </div>
-    </div>  
-    
-    <div class="col-md-auto col-sm-6 mt-3">
-      <div class="card" style="width: 18rem;">
-        <div class="align-self-center">
-          <img src= {{imageProfile}} class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
-        </div>        
-        <div class="card-body">
-          <h5 class="card-title">User Name</h5>
-          <p class="card-text">Data</p>
-        </div>
-        <div class="card-body align-self-center">
-          <a href="#" class="card-link">Edit</a>
-          <a href="#" class="card-link text-danger">Disabled</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-auto col-sm-6 mt-3">
-      <div class="card" style="width: 18rem;">
-        <div class="align-self-center">
-          <img src= {{imageProfile}} class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
-        </div>        
-        <div class="card-body">
-          <h5 class="card-title">User Name</h5>
-          <p class="card-text">Data</p>
-        </div>
-        <div class="card-body row align-self-center">
-          <a href="#" class="card-link col">Edit</a>
-          <a href="#" class="card-link text-danger col ">Disabled</a>
         </div>
       </div>
     </div>
