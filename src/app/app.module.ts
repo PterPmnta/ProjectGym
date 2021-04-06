@@ -19,14 +19,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeadComponent } from './Head/Head.component';
 import { ClientsComponent } from './Clients/Clients.component';
 import { ClientsListComponent } from './ClientsList/ClientsList.component';
+import { AddClientComponent } from './AddClient/AddClient.component';
 
 @NgModule({
-  declarations: [				
+  declarations: [					
     AppComponent,
     LoginComponent,
     HeadComponent,
       ClientsComponent,
-      ClientsListComponent
+      ClientsListComponent,
+      AddClientComponent
    ],
   imports: [
     BrowserModule,
