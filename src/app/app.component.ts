@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
 import {AngularFireAuth} from '@angular/fire/auth'
-import * as firebase from 'firebase';
 import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-root',
@@ -20,7 +18,7 @@ export class AppComponent {
     this.spinner.show();
     
     this.auth.user.subscribe((usuario) => {
-
+      
       setTimeout(() => {
         this.loading = false
         this.spinner.hide();

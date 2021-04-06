@@ -17,12 +17,14 @@ import { LoginComponent } from './Login/Login.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeadComponent } from './Head/Head.component';
+import { ClientsComponent } from './Clients/Clients.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
     LoginComponent,
-    HeadComponent
+    HeadComponent,
+      ClientsComponent
    ],
   imports: [
     BrowserModule,
