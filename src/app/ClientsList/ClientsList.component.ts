@@ -10,14 +10,31 @@ export class ClientsListComponent implements OnInit {
 
   imageProfile: string = "../../assets/img/profilemale1.png"
   clientsList: any[] = []
-
+  client: any
+  
   constructor(private firestore: AngularFirestore) { }
 
   ngOnInit() {
-    this.firestore.collection('clients').valueChanges().subscribe((list) => {
-      console.log(list)
-      this.clientsList = list
+
+    this.clientsList.length = 0
+
+    this.firestore.collection('clients').get().subscribe((list) => {
+      
+      this.client = list.docs
+
+      list.docs.forEach(element => {
+
+        this.client = element.data()
+        this.client.id = element.id
+        this.client.ref = element.ref       
+
+        this.clientsList.push(this.client)
+        console.log(this.clientsList)
+
+      });
+
     })
+
   }
 
   searchClients(event: any){

@@ -18,7 +18,7 @@
           <h4 class="card-text"> {{client.Cedula}} </h4>
           <p class="card-text"> {{ client.Telefono }} </p>
           <p class="card-text"> {{ client.email }} </p>
-          <p class="card-text"> {{ client.Fecha_N }} </p>
+          <p class="card-text"> {{ client.Fecha_N.seconds * 1000 | date: 'yyyy-MM-dd'}} </p>
         </div>
         <div class="card-body align-self-center">
           <a href="#" class="card-link">Edit</a>
