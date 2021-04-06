@@ -15,7 +15,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { LoginComponent } from './Login/Login.component';
 
 import { NgxSpinnerModule } from "ngx-spinner";
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeadComponent } from './Head/Head.component';
 import { ClientsComponent } from './Clients/Clients.component';
 import { ClientsListComponent } from './ClientsList/ClientsList.component';
@@ -37,7 +37,8 @@ import { ClientsListComponent } from './ClientsList/ClientsList.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     NgxSpinnerModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

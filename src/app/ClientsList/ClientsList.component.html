@@ -1,81 +1,73 @@
-<div class="container ">
+<div class="container">
 
-  <div class="row">
+  <h5>Listado de clientes</h5>
 
-    <div class="col-md-auto col-sm mt-3">
+  <form action="" class="form-group mt-3">
+    <input class="form-control" placeholder="Search a client" type="text" (input)="searchClients($event)" >
+  </form>
+
+  <div class="row justify-content-">
+
+    <div class="col-md-auto col-sm-6 mt-3">
       <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+        <div class="align-self-center">
+          <img src= {{imageProfile}} class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
+        </div>        
         <div class="card-body">
           <h5 class="card-title">User Name</h5>
           <p class="card-text">Data</p>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-        </ul>
-        <div class="card-body">
+        <div class="card-body align-self-center">
           <a href="#" class="card-link">Edit</a>
           <a href="#" class="card-link text-danger">Disabled</a>
         </div>
       </div>
     </div>
 
-    <div class="col-md-auto col-sm mt-3">
+    <div class="col-md-auto col-sm-6 mt-3">
       <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+        <div class="align-self-center">
+          <img src= {{imageProfile}} class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
+        </div>        
         <div class="card-body">
           <h5 class="card-title">User Name</h5>
           <p class="card-text">Data</p>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+        <div class="card-body align-self-center">
+          <a href="#" class="card-link">Edit</a>
+          <a href="#" class="card-link text-danger">Disabled</a>
         </div>
       </div>
-    </div>
-
+    </div>  
     
-
-    <div class="col-md-auto col-sm mt-3">
+    <div class="col-md-auto col-sm-6 mt-3">
       <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">User Name</h5>
-          <p class="card-text">Email</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Age</li>
-          <li class="list-group-item">Weight</li>
-          <li class="list-group-item">Gender</li>
-        </ul>
-        <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-auto col-sm mt-3">
-      <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
+        <div class="align-self-center">
+          <img src= {{imageProfile}} class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
+        </div>        
         <div class="card-body">
           <h5 class="card-title">User Name</h5>
           <p class="card-text">Data</p>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">An item</li>
-          <li class="list-group-item">A second item</li>
-          <li class="list-group-item">A third item</li>
-        </ul>
+        <div class="card-body align-self-center">
+          <a href="#" class="card-link">Edit</a>
+          <a href="#" class="card-link text-danger">Disabled</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-auto col-sm-6 mt-3">
+      <div class="card" style="width: 18rem;">
+        <div class="align-self-center">
+          <img src= {{imageProfile}} class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
+        </div>        
         <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <h5 class="card-title">User Name</h5>
+          <p class="card-text">Data</p>
+        </div>
+        <div class="card-body row align-self-center">
+          <a href="#" class="card-link col">Edit</a>
+          <a href="#" class="card-link text-danger col ">Disabled</a>
         </div>
       </div>
     </div>
