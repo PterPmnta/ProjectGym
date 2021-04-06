@@ -18,13 +18,15 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeadComponent } from './Head/Head.component';
 import { ClientsComponent } from './Clients/Clients.component';
+import { ClientsListComponent } from './ClientsList/ClientsList.component';
 
 @NgModule({
-  declarations: [			
+  declarations: [				
     AppComponent,
     LoginComponent,
     HeadComponent,
-      ClientsComponent
+      ClientsComponent,
+      ClientsListComponent
    ],
   imports: [
     BrowserModule,
