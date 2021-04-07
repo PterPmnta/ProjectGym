@@ -21,6 +21,8 @@ import { ClientsComponent } from './Clients/Clients.component';
 import { ClientsListComponent } from './ClientsList/ClientsList.component';
 import { AddClientComponent } from './AddClient/AddClient.component';
 
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+
 @NgModule({
   declarations: [					
     AppComponent,
@@ -35,6 +37,7 @@ import { AddClientComponent } from './AddClient/AddClient.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     AccordionModule.forRoot(),
+    ProgressbarModule.forRoot(),
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
