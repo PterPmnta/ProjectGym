@@ -1,7 +1,6 @@
-import { element } from 'protractor';
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-AddClient',
@@ -9,13 +8,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./AddClient.component.css']
 })
 
-
 export class AddClientComponent implements OnInit {
 
   clientForm!: FormGroup
 
-  boxState: boolean = true
-  controlName!: string
+  boxState2: any = {
+    Cedula: true,
+    Nombre: true,
+    Apellido: true,
+    Telefono: true,
+    Fecha_N: true,
+    email: true
+  }
     
   constructor(public fb: FormBuilder) { }
 
@@ -33,8 +37,6 @@ export class AddClientComponent implements OnInit {
       Imagen: ['', Validators.required]
     })  
 
-    this.boxState === null
-
   }
 
   saveClient(){
@@ -43,14 +45,14 @@ export class AddClientComponent implements OnInit {
 
   isEmpty(event: any){
 
-    this.controlName = event.target.getAttribute('formControlName')
-    
-    if(event.target.value === ""){
-      this.boxState = false
-    }else{
-      this.boxState = true
-    }  
-   
+    let controlName = event.target.getAttribute('formControlName')
+
+    if (event.target.value === "") {
+      this.boxState2[controlName] = false;
+    } else {
+      this.boxState2[controlName] = true;
+    }
+       
   } 
 
 }
