@@ -2,18 +2,23 @@
 
   <h5 class="mt-3">Registrar clientes</h5>
 
-  <form class="mt-3">
+  <form [formGroup]="clientForm" class="mt-3" >
     
     <div class="row">
       
       <div class="col-sm-4">
 
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Cedula" >
+          <input type="text" class="form-control" placeholder="Cedula" formControlName="Cedula" (input) = "isEmpty($event)" 
+                [className]="!this.boxState[1] ? 'form-control is-invalid' : 'form-control border border-secondary'">
         </div>
 
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Email" >
+          <input type="text" class="form-control" placeholder="Email" formControlName="email">
+          <div *ngIf = "clientForm.controls['email'].invalid && clientForm.controls['email'].dirty" class="alert alert-danger mt-2" role="alert">
+            <span *ngIf = "clientForm.controls['email'].errors?.required">Correo requerido</span>
+            <span *ngIf = "clientForm.controls['email'].errors?.email">Correo no valido</span>
+          </div>          
         </div>        
 
       </div>
@@ -21,11 +26,12 @@
       <div class="col-sm-4">
         
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Nombre" >
+          <input type="text" class="form-control" placeholder="Nombre" formControlName="Nombre" (input) = "isEmpty($event)" 
+                 [className]=" !this.boxState ? 'form-control is-invalid' : 'form-control border border-secondary'">
         </div>
 
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Apellido" >
+          <input type="text" class="form-control" placeholder="Apellido" formControlName="Apellido" >
         </div>
 
       </div>
@@ -33,18 +39,18 @@
       <div class="col-sm-4">    
         
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Telefono" >
+          <input type="text" class="form-control" placeholder="Telefono" formControlName="Telefono" >
         </div>
 
         <div class="form-group mt-2">
-          <input type="date" class="form-control" placeholder="Fecha de nacimiento" >
+          <input type="date" class="form-control" placeholder="Fecha de nacimiento" formControlName="Fecha_N">
         </div>
 
       </div>
 
       <div class="col-sm-12 mt-2">
         <div class="form-group mt-2">
-          <input type="file" class="form-control" placeholder="Seleccione una foto" >
+          <input type="file" class="form-control" placeholder="Seleccione una foto" formControlName="Imagen">
         </div>
       </div>
 
@@ -52,7 +58,7 @@
 
     <progressbar [value]="22" type="danger" [striped]="true" class="mt-3">22%</progressbar>
 
-    <button class="btn btn-success mt-3">Registrar</button>
+    <button class="btn btn-success mt-3" (click)="saveClient()">Registrar</button>
 
   </form>
 

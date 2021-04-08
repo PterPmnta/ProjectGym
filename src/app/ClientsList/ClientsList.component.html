@@ -11,11 +11,11 @@
     <div class="col-md-auto col-sm-6 mt-3" *ngFor = "let client of clientsList">
       <div class="card" style="width: 18rem;">
         <div class="align-self-center">
-          <img [src] = "client.Imagen" class="card-img-top mt-2" alt="..." style="height: 150px; width: 150px;">
+          <img [src] = "client.Imagen" class="card-img-top mt-2" alt="User Profile" style="height: 150px; width: 150px;">
         </div>        
         <div class="card-body">
           <h5 class="card-title"> {{ client.Nombre }} {{ client.Apellido }} </h5>
-          <h4 class="card-text"> {{client.Cedula}} </h4>
+          <p class="card-text"> {{client.Cedula}} </p>
           <p class="card-text"> {{ client.Telefono }} </p>
           <p class="card-text"> {{ client.email }} </p>
           <p class="card-text"> {{ client.Fecha_N.seconds * 1000 | date: 'yyyy-MM-dd'}} </p>
