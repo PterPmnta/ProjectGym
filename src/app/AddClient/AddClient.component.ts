@@ -2,16 +2,7 @@ import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-interface Field {
-  value: string;
-  touched: boolean;
-  error: boolean;
-}
 
-interface State {
-  name: Field;
-  email: Field;
-}
 @Component({
   selector: 'app-AddClient',
   templateUrl: './AddClient.component.html',
@@ -23,33 +14,12 @@ export class AddClientComponent implements OnInit {
 
   clientForm!: FormGroup
 
-  boxState: any = {}
-
-  boxState2: any = {
-    Cedula: true,
-    Nombre: true,
-    Apellido: true,
-    Telefono: true,
-    Fecha_N: true,
-    email: true
-  }
-
-  boxState3: any = {
-      Cedula: {
-          value: "",
-          touched: false,
-          error: false,
-      },
-      Nombre: {
-          value: "",
-          touched: false,
-          error: false,
-      }
-   }
-  
+  boxState: boolean = true
+  controlName!: string
+    
   constructor(public fb: FormBuilder) { }
 
-  ngOnInit() {
+  ngOnInit() {  
 
     this.clientForm = this.fb.group({
       Nombre: ['', Validators.required],
@@ -63,6 +33,8 @@ export class AddClientComponent implements OnInit {
       Imagen: ['', Validators.required]
     })  
 
+    this.boxState === null
+
   }
 
   saveClient(){
@@ -71,27 +43,14 @@ export class AddClientComponent implements OnInit {
 
   isEmpty(event: any){
 
-    let controlName = event.target.getAttribute('formControlName')
-    let box = Object.entries(this.boxState2)
-
-    box.forEach(box => {    
-
-    if(event.target.value === ""){
-        let position = box.indexOf(controlName)
-        if(position === 0){
-          box[0+1] = false
-        }   
-      }else{
-        let position = box.indexOf(controlName)
-        if(position === 0){
-          box[0+1] = true
-        } 
-      } 
-
-    })
-
+    this.controlName = event.target.getAttribute('formControlName')
     
-    this.boxState = box    
-  }
+    if(event.target.value === ""){
+      this.boxState = false
+    }else{
+      this.boxState = true
+    }  
+   
+  } 
 
 }

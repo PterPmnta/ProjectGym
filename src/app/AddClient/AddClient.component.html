@@ -9,15 +9,15 @@
       <div class="col-sm-4">
 
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Cedula" formControlName="Cedula" (input) = "isEmpty($event)" 
-                [className]="!this.boxState[1] ? 'form-control is-invalid' : 'form-control border border-secondary'">
+          <input type="text" class="form-control" placeholder="Cedula" formControlName="Cedula" (input) = isEmpty($event)
+          [ngClass]= "(this.controlName === 'Cedula' && this.boxState) ? 'form-control border border-secondary' : 'form-control is-invalid'">
         </div>
 
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Email" formControlName="email">
+          <input type="text" class="form-control" placeholder="Email" formControlName="email" >
           <div *ngIf = "clientForm.controls['email'].invalid && clientForm.controls['email'].dirty" class="alert alert-danger mt-2" role="alert">
             <span *ngIf = "clientForm.controls['email'].errors?.required">Correo requerido</span>
-            <span *ngIf = "clientForm.controls['email'].errors?.email">Correo no valido</span>
+            <span *ngIf = "clientForm.controls['email'].errors?.email">No tiene formato de correo</span>
           </div>          
         </div>        
 
@@ -26,12 +26,13 @@
       <div class="col-sm-4">
         
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Nombre" formControlName="Nombre" (input) = "isEmpty($event)" 
-                 [className]=" !this.boxState ? 'form-control is-invalid' : 'form-control border border-secondary'">
+          <input type="text" class="form-control" placeholder="Nombre" formControlName="Nombre"
+          [ngClass]= "(this.controlName === 'Nombre' && this.boxState) ? 'form-control border border-secondary' : 'form-control is-invalid'">
         </div>
 
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Apellido" formControlName="Apellido" >
+          <input type="text" class="form-control" placeholder="Apellido" formControlName="Apellido" (input) = isEmpty($event)
+          [ngClass]= "(this.controlName === 'Apellido' && this.boxState) ? 'form-control border border-secondary' : 'form-control is-invalid'">
         </div>
 
       </div>
@@ -39,18 +40,20 @@
       <div class="col-sm-4">    
         
         <div class="form-group mt-2">
-          <input type="text" class="form-control" placeholder="Telefono" formControlName="Telefono" >
+          <input type="text" class="form-control" placeholder="Telefono" formControlName="Telefono" (input) = isEmpty($event)
+          [ngClass]= "(this.controlName === 'Telefono' && this.boxState) ? 'form-control border border-secondary' : 'form-control is-invalid'">
         </div>
 
         <div class="form-group mt-2">
-          <input type="date" class="form-control" placeholder="Fecha de nacimiento" formControlName="Fecha_N">
+          <input type="date" class="form-control" placeholder="Fecha de nacimiento" formControlName="Fecha_N" (input) = isEmpty($event)
+          [ngClass]= "(this.controlName === 'Fecha_N' && this.boxState) ? 'form-control border border-secondary' : 'form-control is-invalid'">
         </div>
 
       </div>
 
       <div class="col-sm-12 mt-2">
         <div class="form-group mt-2">
-          <input type="file" class="form-control" placeholder="Seleccione una foto" formControlName="Imagen">
+          <input type="file" class="form-control" placeholder="Seleccione una foto" formControlName="Imagen" aria-label="file example">
         </div>
       </div>
 
