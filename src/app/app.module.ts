@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { LoginComponent } from './Login/Login.component';
 
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -22,6 +23,8 @@ import { ClientsListComponent } from './ClientsList/ClientsList.component';
 import { AddClientComponent } from './AddClient/AddClient.component';
 
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [					
@@ -40,10 +43,12 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     ProgressbarModule.forRoot(),
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule,
+    AngularFireAuthModule,    
     NgxSpinnerModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

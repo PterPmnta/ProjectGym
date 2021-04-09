@@ -53,13 +53,14 @@
 
       <div class="col-sm-12 mt-2">
         <div class="form-group mt-2">
-          <input type="file" class="form-control border border-secondary" placeholder="Seleccione una foto" formControlName="Imagen" aria-label="file example">
+          <input type="file" class="form-control border border-secondary" placeholder="Seleccione una foto" formControlName="Imagen" aria-label="file example" 
+                 (change)= "imageUpload($event)">
         </div>
       </div>
 
     </div>   
 
-    <progressbar [value]="22" type="danger" [striped]="true" class="mt-3">22%</progressbar>
+    <progressbar [value]= "progressBarState" type="info" [striped]="true" class="progress-striped active mt-3"> {{ progressBarState }} </progressbar>
 
     <button class="btn btn-success mt-3" (click)="saveClient()">Registrar</button>
 

@@ -1,4 +1,5 @@
-
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -20,8 +21,10 @@ export class AddClientComponent implements OnInit {
     Fecha_N: true,
     email: true
   }
+
+  progressBarState: number = 0
     
-  constructor(public fb: FormBuilder) { }
+  constructor(public fb: FormBuilder, private storage: AngularFireStorage) { }
 
   ngOnInit() {  
 
@@ -52,7 +55,27 @@ export class AddClientComponent implements OnInit {
     } else {
       this.boxState2[controlName] = true;
     }
-       
   } 
+
+  imageUpload(evento: any){
+    
+    let nameImageByDate = new Date().getTime().toString()
+    let file = evento.target.files[0]; 
+    let formatImage = file.type.replace('image/', '')     
+    let filePath = `clientes/${nameImageByDate}.${formatImage}`;
+    const ref = this.storage.ref(filePath);
+    const task = ref.put(file);
+
+    task.percentageChanges().subscribe((porcent) => {
+      this.progressBarState = parseInt(porcent!.toString())
+    })    
+
+    task.then(() => {
+        ref.getDownloadURL().subscribe((imageUrl) => {
+        console.log(imageUrl)
+      })
+    })
+
+  }
 
 }
