@@ -46,9 +46,10 @@ export class AddClientComponent implements OnInit {
 
   saveClient(){
     this.clientForm.value.Imagen = this.urlImage
-    console.log(this.clientForm.value)
+    this.clientForm.value.Fecha_N = new Date(this.clientForm.value.Fecha_N)
     this.db.collection('clients').add(this.clientForm.value).then((results) => {
       this.clientsDataServices.getClientsFromDB()
+      this.clientForm.reset()
     })
   }
 
