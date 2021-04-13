@@ -62,7 +62,7 @@
 
     <progressbar [value]= "progressBarState" type="info" [striped]="true" class="progress-striped active mt-3"> {{ progressBarState }} </progressbar>
 
-    <button class="btn btn-success mt-3" (click)="saveClient()">Registrar</button>
+    <button [disabled]="!clientForm.valid" class="btn btn-success mt-3" (click)="saveClient()">Registrar</button>
 
   </form>
 

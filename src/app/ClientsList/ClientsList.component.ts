@@ -1,3 +1,4 @@
+import { ClientsService } from './../Services/Clients.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -14,31 +15,14 @@ export class ClientsListComponent implements OnInit {
   imageProfile: string = "../../assets/img/profilemale1.png"
   clientsList: any[] = []
   client: any  
+  test: any[] = []
   
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, public clientsDataServices: ClientsService) { }
 
-  ngOnInit() {
-
-    
+  ngOnInit() {    
 
     this.clientsList.length = 0
-
-    this.firestore.collection('clients').get().subscribe((list) => {
-      
-      this.client = list.docs
-
-      list.docs.forEach(element => {
-
-        this.client = element.data()
-        this.client.id = element.id
-        this.client.ref = element.ref       
-
-        this.clientsList.push(this.client)
-        //console.log(this.clientsList)
-
-      });
-
-    })
+    this.clientsList = this.clientsDataServices.getClientsFromDB()
 
   }
 
