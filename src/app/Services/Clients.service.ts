@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import {  Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ClientsService {
   clientsList: any[] = []
   client: any 
 
-  clientIdFromList: any = new BehaviorSubject('');
+  clientIdFromList: any = new Subject();
 
   constructor(private firestore: AngularFirestore) { }
 

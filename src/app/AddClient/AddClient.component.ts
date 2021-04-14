@@ -26,6 +26,8 @@ export class AddClientComponent implements OnInit {
   }
 
   progressBarState: number = 0  
+
+  update: boolean = false
     
   constructor(public fb: FormBuilder, 
               private storage: AngularFireStorage, 
@@ -100,8 +102,14 @@ export class AddClientComponent implements OnInit {
 
   clientById(){
     this.clientsDataServices.clientIdFromList.subscribe((Id: any) => {
-      console.log(Id)
+      this.db.doc<any>(`clients/${Id}`).valueChanges().subscribe((client) => {
+        console.log(client)
+      })
     })
+  }
+
+  updateClient(){
+    
   }
 
 }
