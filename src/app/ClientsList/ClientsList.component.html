@@ -19,10 +19,11 @@
           <p class="card-text"> {{ client.Telefono }} </p>
           <p class="card-text"> {{ client.email }} </p>
           <p class="card-text"> {{ client.Fecha_N.seconds * 1000 | date: 'yyyy-MM-dd'}} </p>
+          <p class="card-text"> {{ client.id }} </p>
         </div>
         <div class="card-body align-self-center">
-          <a href="#" class="card-link">Edit</a>
-          <a href="#" class="card-link text-danger">Disabled</a>
+          <a class="card-link" (click)="sendClientId(client.id)">Edit</a>
+          <a class="card-link text-danger">Disabled</a>
         </div>
       </div>
     </div>

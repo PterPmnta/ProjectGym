@@ -1,8 +1,7 @@
 import { ClientsService } from './../Services/Clients.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-///import { tns } from "node_modules/tiny-slider/src/tiny-slider.js"
 
 @Component({
   selector: 'app-ClientsList',
@@ -15,9 +14,12 @@ export class ClientsListComponent implements OnInit {
   imageProfile: string = "../../assets/img/profilemale1.png"
   clientsList: any[] = []
   client: any  
-  test: any[] = []
+  Id: string = ""
+
+  @Output() searchByClientId = new EventEmitter()
   
-  constructor(private firestore: AngularFirestore, public clientsDataServices: ClientsService) { }
+  constructor(private firestore: AngularFirestore, 
+              public clientsDataServices: ClientsService) { }
 
   ngOnInit() {    
 
@@ -31,6 +33,11 @@ export class ClientsListComponent implements OnInit {
     this.dataProducts = this.productService.localProducts.filter(product => {
       return product.Name.toLowerCase().includes(productFind)
     }) */
+  }
+
+  sendClientId(id: string){
+    this.Id = id
+    this.clientsDataServices.clientIdFromList.next(this.Id)
   }
 
 }

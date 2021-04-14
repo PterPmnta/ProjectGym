@@ -1,3 +1,4 @@
+
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Component, OnInit } from '@angular/core';
@@ -24,9 +25,15 @@ export class AddClientComponent implements OnInit {
     email: true
   }
 
-  progressBarState: number = 0
+  progressBarState: number = 0  
     
-  constructor(public fb: FormBuilder, private storage: AngularFireStorage, private db: AngularFirestore, public clientsDataServices: ClientsService) { }
+  constructor(public fb: FormBuilder, 
+              private storage: AngularFireStorage, 
+              private db: AngularFirestore, 
+              public clientsDataServices: ClientsService) 
+              { 
+                this.clientById()
+              }
 
   ngOnInit() {  
 
@@ -45,12 +52,14 @@ export class AddClientComponent implements OnInit {
   }
 
   saveClient(){
+
     this.clientForm.value.Imagen = this.urlImage
     this.clientForm.value.Fecha_N = new Date(this.clientForm.value.Fecha_N)
     this.db.collection('clients').add(this.clientForm.value).then((results) => {
       this.clientsDataServices.getClientsFromDB()
       this.clientForm.reset()
     })
+
   }
 
   isEmpty(event: any){
@@ -81,13 +90,18 @@ export class AddClientComponent implements OnInit {
 
       task.then(() => {
           ref.getDownloadURL().subscribe((imageUrl) => {
-          this.urlImage = imageUrl
-          console.log(this.urlImage)
+           this.urlImage = imageUrl
         })
       })
 
     } 
 
+  }
+
+  clientById(){
+    this.clientsDataServices.clientIdFromList.subscribe((Id: any) => {
+      console.log(Id)
+    })
   }
 
 }
