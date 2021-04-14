@@ -18,7 +18,6 @@ export class ClientsService {
   getClientsFromDB(){
 
     this.clientsList.length = 0
-
     this.firestore.collection('clients').get().subscribe((list) => {
       
       this.client = list.docs
@@ -27,8 +26,7 @@ export class ClientsService {
 
         this.client = element.data()
         this.client.id = element.id
-        this.client.ref = element.ref       
-
+        this.client.ref = element.ref 
         this.clientsList.push(this.client)
 
       });
@@ -36,7 +34,6 @@ export class ClientsService {
     })
 
     return this.clientsList
-
   }
 
 }

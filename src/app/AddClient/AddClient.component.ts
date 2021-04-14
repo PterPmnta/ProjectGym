@@ -28,6 +28,9 @@ export class AddClientComponent implements OnInit {
   progressBarState: number = 0  
 
   update: boolean = false
+  stateClientForm: boolean = false
+  btnSaveClient: boolean = false
+  btnUpdateClient: boolean = false
     
   constructor(public fb: FormBuilder, 
               private storage: AngularFireStorage, 
@@ -53,6 +56,42 @@ export class AddClientComponent implements OnInit {
 
   }
 
+  isEmpty(event: any){
+
+    let controlName = event.target.getAttribute('formControlName')
+
+    if (event.target.value === "") {
+
+        if(this.btnUpdateClient === true){
+          this.boxState2[controlName] = false;
+          this.update = false
+          //this.clientForm.valid = false
+        }
+
+        if(this.btnUpdateClient === false){
+          this.boxState2[controlName] = false;
+        }
+          
+
+    } else {
+
+      if(this.btnUpdateClient === true){
+        this.boxState2[controlName] = true;  
+        this.setImageAndDate()
+        this.stateClientForm = Object.values(this.clientForm.value).includes("") 
+        if(this.stateClientForm === false){
+          this.update = true
+          //this.clientForm.valid
+        }  
+      }
+
+      if(this.btnUpdateClient === false){
+        this.boxState2[controlName] = true;
+      }
+
+    }
+  } 
+
   saveClient(){
 
     this.clientForm.value.Imagen = this.urlImage
@@ -62,18 +101,7 @@ export class AddClientComponent implements OnInit {
       this.clientForm.reset()
     })
 
-  }
-
-  isEmpty(event: any){
-
-    let controlName = event.target.getAttribute('formControlName')
-
-    if (event.target.value === "") {
-      this.boxState2[controlName] = false;
-    } else {
-      this.boxState2[controlName] = true;
-    }
-  } 
+  }  
 
   imageUpload(evento: any){
 
@@ -101,6 +129,7 @@ export class AddClientComponent implements OnInit {
   }
 
   clientById(){
+
     this.clientsDataServices.clientIdFromList.subscribe((Id: any) => {
       this.db.doc<any>(`clients/${Id}`).valueChanges().subscribe((client) => {
 
@@ -108,7 +137,7 @@ export class AddClientComponent implements OnInit {
         let year = fecha.getFullYear()
         let month = ("0" + (fecha.getMonth() + 1)).slice(-2)
         let day = ("0" + fecha.getDate()).slice(-2)
-        let fullDate = `${year}-${month}-${day}`
+        let fullDate = `${year}-${month}-${day}` 
 
         this.clientForm.setValue({
           Nombre: client.Nombre,
@@ -118,14 +147,30 @@ export class AddClientComponent implements OnInit {
           email: client.email,
           Fecha_N: fullDate,
           Imagen: ''
-        })
-        this.urlImage = this.clientForm.value.Imagen
-        console.log(this.urlImage)
+        })   
+        this.urlImage = client.Imagen        
+        this.btnUpdateClient = true  
+        this.update = true
       })
+        //this.btnUpdateClient = true
+        //this.update = true      
     })
   }
 
   updateClient(){
+    
+    this.setImageAndDate()
+    this.stateClientForm = Object.values(this.clientForm.value).includes("") 
+    if(this.stateClientForm === false){
+      console.log("Esta habilitado")
+    }
+    
+  }
+
+  setImageAndDate(){
+
+    this.clientForm.value.Imagen = this.urlImage
+    this.clientForm.value.Fecha_N = new Date(this.clientForm.value.Fecha_N) 
 
   }
 
