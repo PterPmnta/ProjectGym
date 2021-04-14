@@ -132,12 +132,8 @@ export class AddClientComponent implements OnInit {
 
     this.clientsDataServices.clientIdFromList.subscribe((Id: any) => {
       this.db.doc<any>(`clients/${Id}`).valueChanges().subscribe((client) => {
-
-        let fecha = new Date(client.Fecha_N.seconds * 1000)
-        let year = fecha.getFullYear()
-        let month = ("0" + (fecha.getMonth() + 1)).slice(-2)
-        let day = ("0" + fecha.getDate()).slice(-2)
-        let fullDate = `${year}-${month}-${day}` 
+        
+        let fullDate = this.dateToSave(client.Fecha_N.seconds) 
 
         this.clientForm.setValue({
           Nombre: client.Nombre,
@@ -152,8 +148,6 @@ export class AddClientComponent implements OnInit {
         this.btnUpdateClient = true  
         this.update = true
       })
-        //this.btnUpdateClient = true
-        //this.update = true      
     })
   }
 
@@ -168,9 +162,18 @@ export class AddClientComponent implements OnInit {
   }
 
   setImageAndDate(){
-
     this.clientForm.value.Imagen = this.urlImage
     this.clientForm.value.Fecha_N = new Date(this.clientForm.value.Fecha_N) 
+  }
+
+  dateToSave(secondsDate: number){
+
+    let fecha = new Date(secondsDate * 1000)
+    let year = fecha.getFullYear()
+    let month = ("0" + (fecha.getMonth() + 1)).slice(-2)
+    let day = ("0" + fecha.getDate()).slice(-2)
+    let fullDate = `${year}-${month}-${day}`
+    return fullDate
 
   }
 
