@@ -103,13 +103,30 @@ export class AddClientComponent implements OnInit {
   clientById(){
     this.clientsDataServices.clientIdFromList.subscribe((Id: any) => {
       this.db.doc<any>(`clients/${Id}`).valueChanges().subscribe((client) => {
-        console.log(client)
+
+        let fecha = new Date(client.Fecha_N.seconds * 1000)
+        let year = fecha.getFullYear()
+        let month = ("0" + (fecha.getMonth() + 1)).slice(-2)
+        let day = ("0" + fecha.getDate()).slice(-2)
+        let fullDate = `${year}-${month}-${day}`
+
+        this.clientForm.setValue({
+          Nombre: client.Nombre,
+          Apellido: client.Apellido,
+          Telefono: client.Telefono,
+          Cedula: client.Cedula,
+          email: client.email,
+          Fecha_N: fullDate,
+          Imagen: ''
+        })
+        this.urlImage = this.clientForm.value.Imagen
+        console.log(this.urlImage)
       })
     })
   }
 
   updateClient(){
-    
+
   }
 
 }
