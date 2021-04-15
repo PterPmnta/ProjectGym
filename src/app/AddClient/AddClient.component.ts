@@ -1,3 +1,4 @@
+import { MessageService } from './../Services/Message.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Component, OnInit } from '@angular/core';
@@ -34,7 +35,8 @@ export class AddClientComponent implements OnInit {
   btnUpdateClient: boolean = false
     
   constructor(public fb: FormBuilder, private storage: AngularFireStorage, 
-              private db: AngularFirestore, public clientsDataServices: ClientsService) 
+              private db: AngularFirestore, public clientsDataServices: ClientsService,
+              public messagesAlert: MessageService) 
               { 
                 this.searchClientById()
               }
@@ -94,19 +96,11 @@ export class AddClientComponent implements OnInit {
     this.clientForm.value.Imagen = this.urlImage
     this.clientForm.value.Fecha_N = new Date(this.clientForm.value.Fecha_N)
     this.db.collection('clients').add(this.clientForm.value).then((results) => {
-      Swal.fire(
-        'Usuario registrado!',
-        'Registro exitoso!',
-        'success'
-      )
+      this.messagesAlert.correctMessage()
       this.clientsDataServices.getClientsFromDB()
       this.clientForm.reset()
     }).catch((error) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops... al parecer ocurrio un error',
-        text: `${error}!`
-      })
+      this.messagesAlert.errorMessage(error)
     })
 
   }  
@@ -168,19 +162,11 @@ export class AddClientComponent implements OnInit {
     this.stateClientForm = Object.values(this.clientForm.value).includes("") 
     if(this.stateClientForm === false){
       this.db.doc(`clients/${this.idReceived}`).update(this.clientForm.value).then(() => {
-        Swal.fire(
-          'Usuario actualizado!',
-          'Actualizacion exitosa!',
-          'success'
-        )
+        this.messagesAlert.updateMessage()
         this.clientsDataServices.getClientsFromDB()
         this.clientForm.reset()
       }).catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops... al parecer ocurrio un error',
-          text: `${error}!`
-        })
+        this.messagesAlert.errorMessage(error)
       })
     }
     
