@@ -1,9 +1,9 @@
-
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from '../Services/Clients.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-AddClient',
@@ -15,6 +15,7 @@ export class AddClientComponent implements OnInit {
 
   clientForm!: FormGroup
   urlImage: string = ""
+  idReceived: string = ""
 
   boxState2: any = {
     Cedula: true,
@@ -32,12 +33,10 @@ export class AddClientComponent implements OnInit {
   btnSaveClient: boolean = false
   btnUpdateClient: boolean = false
     
-  constructor(public fb: FormBuilder, 
-              private storage: AngularFireStorage, 
-              private db: AngularFirestore, 
-              public clientsDataServices: ClientsService) 
+  constructor(public fb: FormBuilder, private storage: AngularFireStorage, 
+              private db: AngularFirestore, public clientsDataServices: ClientsService) 
               { 
-                this.clientById()
+                this.searchClientById()
               }
 
   ngOnInit() {  
@@ -65,7 +64,6 @@ export class AddClientComponent implements OnInit {
         if(this.btnUpdateClient === true){
           this.boxState2[controlName] = false;
           this.update = false
-          //this.clientForm.valid = false
         }
 
         if(this.btnUpdateClient === false){
@@ -81,7 +79,6 @@ export class AddClientComponent implements OnInit {
         this.stateClientForm = Object.values(this.clientForm.value).includes("") 
         if(this.stateClientForm === false){
           this.update = true
-          //this.clientForm.valid
         }  
       }
 
@@ -97,8 +94,19 @@ export class AddClientComponent implements OnInit {
     this.clientForm.value.Imagen = this.urlImage
     this.clientForm.value.Fecha_N = new Date(this.clientForm.value.Fecha_N)
     this.db.collection('clients').add(this.clientForm.value).then((results) => {
+      Swal.fire(
+        'Usuario registrado!',
+        'Registro exitoso!',
+        'success'
+      )
       this.clientsDataServices.getClientsFromDB()
       this.clientForm.reset()
+    }).catch((error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops... al parecer ocurrio un error',
+        text: `${error}!`
+      })
     })
 
   }  
@@ -128,10 +136,11 @@ export class AddClientComponent implements OnInit {
 
   }
 
-  clientById(){
+  searchClientById(){
 
-    this.clientsDataServices.clientIdFromList.subscribe((Id: any) => {
-      this.db.doc<any>(`clients/${Id}`).valueChanges().subscribe((client) => {
+    this.clientsDataServices.clientIdFromList.subscribe((Id: any) => { 
+      //let dataId = Id     
+      this.db.doc<any>(`clients/${Id}`).valueChanges().subscribe((client) => {        
         
         let fullDate = this.dateToSave(client.Fecha_N.seconds) 
 
@@ -146,9 +155,11 @@ export class AddClientComponent implements OnInit {
         })   
         this.urlImage = client.Imagen        
         this.btnUpdateClient = true  
-        this.update = true
+        this.update = true        
+        this.idReceived = Id      
       })
     })
+
   }
 
   updateClient(){
@@ -156,8 +167,23 @@ export class AddClientComponent implements OnInit {
     this.setImageAndDate()
     this.stateClientForm = Object.values(this.clientForm.value).includes("") 
     if(this.stateClientForm === false){
-      console.log("Esta habilitado")
+      this.db.doc(`clients/${this.idReceived}`).update(this.clientForm.value).then(() => {
+        Swal.fire(
+          'Usuario actualizado!',
+          'Actualizacion exitosa!',
+          'success'
+        )
+        this.clientsDataServices.getClientsFromDB()
+        this.clientForm.reset()
+      }).catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops... al parecer ocurrio un error',
+          text: `${error}!`
+        })
+      })
     }
+    
     
   }
 

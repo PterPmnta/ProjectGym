@@ -29,10 +29,8 @@ export class ClientsService {
         this.client.ref = element.ref 
         this.clientsList.push(this.client)
 
-      });
-
+      })
     })
-
     return this.clientsList
   }
 
