@@ -32,14 +32,19 @@ export class LoginComponent implements OnInit {
   logIn(){
     
     this.Do_A_Post = "Check credentials, wait a moment."
-    if(this.loginForm.valid){      
+
+    if(this.loginForm.valid){     
+
       this.dataInForm = true
-      this.spinner.show()    
+      this.spinner.show()  
+
       this.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
              .then((userDataLogin) => {
               console.log(userDataLogin)
-              this.spinner.hide()              
+              this.spinner.hide()
+
       }).catch((e) => {
+
         this.Do_A_Post = "Exists a problem with your data access."
         this.spinner.show()
         console.log(e)
@@ -47,14 +52,13 @@ export class LoginComponent implements OnInit {
           if(e.message === this.invalidUserOrPass){
             this.errorText = "El correo o contraseña son incorrectos"
           }        
-          this.spinner.hide()
-       
+          this.spinner.hide()       
       })
+
     }else{
       this.dataInForm = false
     }
-
-    
+        
   }
 
 }

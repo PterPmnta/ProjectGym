@@ -25,15 +25,17 @@ import { AddClientComponent } from './AddClient/AddClient.component';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { PriceComponent } from './Price/Price.component';
 
 @NgModule({
-  declarations: [					
+  declarations: [						
     AppComponent,
     LoginComponent,
     HeadComponent,
-      ClientsComponent,
-      ClientsListComponent,
-      AddClientComponent
+    ClientsComponent,
+    ClientsListComponent,
+    AddClientComponent,
+    PriceComponent
    ],
   imports: [
     BrowserModule,
