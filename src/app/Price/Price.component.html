@@ -2,30 +2,26 @@
 
   <div class="row">
 
-    <div class="col-md-8">
-      <h5 class="title mt-3">Lista de precios</h5>
-    </div>
-
     <div class="col-md-4">
 
       <h5 class="title mt-3">Formulario registro de precios</h5>      
-      <form class="mt-2">
+      <form class="mt-2" [formGroup] = "priceForm">
 
         <div class="form-group">
-          <input type="text" class="form-control mt-2" placeholder="Nombre" >
+          <input type="text" class="form-control mt-2" placeholder="Nombre" formControlName="nombre" >
         </div>
 
         <div class="form-group">
-          <input type="number" class="form-control mt-2" placeholder="Costo" >
+          <input type="number" class="form-control mt-2" placeholder="Costo" formControlName="costo" >
         </div>
 
         <div class="form-group">
-          <input type="number" class="form-control mt-2" placeholder="Duracion" >
+          <input type="number" class="form-control mt-2" placeholder="Duracion" formControlName="duracion" >
         </div>
 
-        <div class="form-group">
+        <div class="form-group" formControlName="tiempo">
           <select class="form-select mt-2">
-            <option selected>Selecciona una opcion</option>
+            <option selected>Selecciona una opcion - Tiempo</option>
             <option value="1">Dia</option>
             <option value="2">Semana</option>
             <option value="3">Quincena</option>
@@ -40,6 +36,37 @@
       </form>
 
     </div>
+
+    <div class="col-md-8">
+      <h5 class="title mt-3">Lista de precios</h5>
+
+      <table class="table table-striped mt-2">
+
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Costo</th>
+            <th scope="col">Duracion</th>
+            <th scope="col">Tiempo</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Semana</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+    
 
   </div>
 </div>
