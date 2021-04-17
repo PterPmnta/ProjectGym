@@ -30,8 +30,8 @@
           </select>
         </div>
 
-        <button class="btn btn-primary mt-3 col-4">Save</button>
-        <button class="btn btn-warning mt-3 ms-2 col-4">Update</button>
+        <button [disabled]="!priceForm.valid" class="btn btn-primary mt-3 col-4">Save</button>
+        <button [disabled]="!priceForm.valid" class="btn btn-warning mt-3 ms-2 col-4">Update</button>
 
       </form>
 
