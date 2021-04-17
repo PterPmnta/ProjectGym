@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientsService } from '../Services/Clients.service';
 import Swal from 'sweetalert2'
+import { Subject, Subscriber, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-AddClient',
@@ -33,7 +34,9 @@ export class AddClientComponent implements OnInit {
   stateClientForm: boolean = false
   btnSaveClient: boolean = false
   btnUpdateClient: boolean = false
-    
+  private ngUnsubscribe: Subscription | null = null
+
+      
   constructor(public fb: FormBuilder, private storage: AngularFireStorage, 
               private db: AngularFirestore, public clientsDataServices: ClientsService,
               public messagesAlert: MessageService) 
@@ -41,6 +44,7 @@ export class AddClientComponent implements OnInit {
                 this.searchClientById()
               }
 
+             
   ngOnInit() {  
 
     this.clientForm = this.fb.group({
@@ -53,8 +57,8 @@ export class AddClientComponent implements OnInit {
       ])],
       Fecha_N: ['', Validators.required],
       Imagen: ['', Validators.required]
-    })  
-
+    }) 
+    
   }
 
   isEmpty(event: any){
@@ -130,12 +134,12 @@ export class AddClientComponent implements OnInit {
 
   }
 
-  searchClientById(){
+  searchClientById(){   
 
-    this.clientsDataServices.clientIdFromList.subscribe((Id: any) => { 
-      //let dataId = Id     
-      this.db.doc<any>(`clients/${Id}`).valueChanges().subscribe((client) => {        
-        
+    this.clientsDataServices.clientIdFromList.subscribe((Id: any) => {  
+
+      this.ngUnsubscribe = this.db.doc<any>(`clients/${Id}`).valueChanges().subscribe((client) => { 
+
         let fullDate = this.dateToSave(client.Fecha_N.seconds) 
 
         this.clientForm.setValue({
@@ -152,25 +156,39 @@ export class AddClientComponent implements OnInit {
         this.update = true        
         this.idReceived = Id      
       })
-    })
 
+    })   
+    
   }
 
   updateClient(){
     
     this.setImageAndDate()
-    this.stateClientForm = Object.values(this.clientForm.value).includes("") 
-    if(this.stateClientForm === false){
+    this.stateClientForm = Object.values(this.clientForm.value).includes("")
+
+    if(this.stateClientForm === false){      
+
+      this.ngUnsubscribe?.unsubscribe()
+
       this.db.doc(`clients/${this.idReceived}`).update(this.clientForm.value).then(() => {
-        this.messagesAlert.updateMessage()
+        
+        this.messagesAlert.updateMessage()        
         this.clientsDataServices.getClientsFromDB()
-        this.clientForm.reset()
+        this.clientForm.setValue({
+          Nombre: "",
+          Apellido: "",
+          Telefono: "",
+          Cedula: "",
+          email: "",
+          Fecha_N: "",
+          Imagen: ''
+        }) 
+
       }).catch((error) => {
         this.messagesAlert.errorMessage(error)
-      })
-    }
-    
-    
+      })       
+
+    }       
   }
 
   setImageAndDate(){

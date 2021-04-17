@@ -19,8 +19,8 @@
           <input type="number" class="form-control mt-2" placeholder="Duracion" formControlName="duracion" >
         </div>
 
-        <div class="form-group" formControlName="tiempo">
-          <select class="form-select mt-2">
+        <div class="form-group">
+          <select class="form-select mt-2" formControlName="tiempo">
             <option selected>Selecciona una opcion - Tiempo</option>
             <option value="1">Dia</option>
             <option value="2">Semana</option>
@@ -30,7 +30,7 @@
           </select>
         </div>
 
-        <button [disabled]="!priceForm.valid" class="btn btn-primary mt-3 col-4">Save</button>
+        <button [disabled]="!priceForm.valid" class="btn btn-primary mt-3 col-4" (click)= "savePrices()">Save</button>
         <button [disabled]="!priceForm.valid" class="btn btn-warning mt-3 ms-2 col-4">Update</button>
 
       </form>

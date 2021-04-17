@@ -1,3 +1,5 @@
+import { MessageService } from './../Services/Message.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +12,7 @@ export class PriceComponent implements OnInit {
 
   priceForm!: FormGroup
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private db: AngularFirestore, private msg: MessageService) { }
 
   ngOnInit() {
 
@@ -21,6 +23,16 @@ export class PriceComponent implements OnInit {
       tiempo: ['', Validators.required]
     })
 
+  }
+
+  savePrices(){
+    //console.log(this.priceForm.value)
+    this.db.collection('prices').add(this.priceForm.value).then(() => {
+      this.msg.correctMessage()
+      this.priceForm.reset()
+    }).catch(error => {
+      this.msg.errorMessage(error)
+    })
   }
 
 }

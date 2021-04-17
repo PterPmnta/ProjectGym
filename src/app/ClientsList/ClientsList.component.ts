@@ -15,6 +15,7 @@ export class ClientsListComponent implements OnInit {
   clientsList: any[] = []
   client: any  
   Id: string = ""
+  clickOnEditButton: boolean = false
 
   @Output() searchByClientId = new EventEmitter()
   
@@ -26,7 +27,7 @@ export class ClientsListComponent implements OnInit {
     this.clientsList.length = 0
     this.clientsList = this.clientsDataServices.getClientsFromDB()
 
-  }
+  }  
 
   searchClients(event: any){
    /* let productFind: string = event.target.value
@@ -35,7 +36,7 @@ export class ClientsListComponent implements OnInit {
     }) */
   }
 
-  sendClientId(id: string){
+  sendClientId(id: string){     
     this.Id = id
     this.clientsDataServices.clientIdFromList.next(this.Id)
   }
