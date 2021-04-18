@@ -21,7 +21,7 @@
 
         <div class="form-group">
           <select class="form-select mt-2" formControlName="tiempo">
-            <option selected>Selecciona una opcion - Tiempo</option>
+            <option selected value="0">Selecciona una opcion - Tiempo</option>
             <option value="1">Dia</option>
             <option value="2">Semana</option>
             <option value="3">Quincena</option>
@@ -53,12 +53,12 @@
         </thead>
 
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>Semana</td>
+          <tr *ngFor="let price of pricesList">
+            <th scope="row"> {{ price.id }} </th>
+            <td> {{price.nombre}} </td>
+            <td> {{price.costo | currency}} </td>
+            <td> {{price.duracion}} </td>
+            <td> {{price.tiempo}} </td>
           </tr>
         </tbody>
 

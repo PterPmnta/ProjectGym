@@ -11,16 +11,16 @@ export class MessageService {
 
   correctMessage(){
     Swal.fire(
-      'Usuario registrado!',
-      'Registro exitoso!',
+      'Operacion exitosa!',
+      'Registro realizado!',
       'success'
     )
   }
 
   updateMessage(){
     Swal.fire(
-      'Usuario actualizado!',
-      'Actualizacion exitosa!',
+      'Operacion exitosa!',
+      'Actualizacion realizada!',
       'success'
     )
   }
