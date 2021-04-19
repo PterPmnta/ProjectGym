@@ -15,7 +15,7 @@ export class ClientsService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  getClientsFromDB(){
+  getClientsFromDB(){ 
 
     this.clientsList.length = 0
     this.firestore.collection('clients').get().subscribe((list) => {

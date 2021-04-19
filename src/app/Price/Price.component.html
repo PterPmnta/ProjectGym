@@ -8,20 +8,20 @@
       <form class="mt-2" [formGroup] = "priceForm">
 
         <div class="form-group">
-          <input type="text" class="form-control mt-2" placeholder="Nombre" formControlName="nombre" >
+          <input type="text" class="form-control mt-2" placeholder="Nombre" formControlName="nombre" (input) = isEmpty($event)>
         </div>
 
         <div class="form-group">
-          <input type="number" class="form-control mt-2" placeholder="Costo" formControlName="costo" >
+          <input type="number" class="form-control mt-2" placeholder="Costo" formControlName="costo" (input) = isEmpty($event)>
         </div>
 
         <div class="form-group">
-          <input type="number" class="form-control mt-2" placeholder="Duracion" formControlName="duracion" >
+          <input type="number" class="form-control mt-2" placeholder="Duracion" formControlName="duracion" (input) = isEmpty($event)>
         </div>
 
         <div class="form-group">
-          <select class="form-select mt-2" formControlName="tiempo">
-            <option selected value="0">Selecciona una opcion - Tiempo</option>
+          <select class="form-select mt-2" formControlName="tiempo" >
+            <option value="" disabled selected hidden>Seleccion una opcion de tiempo</option>            
             <option value="1">Dia</option>
             <option value="2">Semana</option>
             <option value="3">Quincena</option>
@@ -30,8 +30,8 @@
           </select>
         </div>
 
-        <button [disabled]="!priceForm.valid" class="btn btn-primary mt-3 col-4" (click)= "savePrices()">Save</button>
-        <button [disabled]="!priceForm.valid" class="btn btn-warning mt-3 ms-2 col-4">Update</button>
+        <button [disabled]="!priceForm.valid || this.btnEditPrice" class="btn btn-primary mt-3 col-4" (click)= "savePrices()">Save</button>
+        <button [disabled]="this.btnEditPrice === false || this.updatePrice === false" class="btn btn-warning mt-3 ms-2 col-4">Update</button>
 
       </form>
 
@@ -40,20 +40,22 @@
     <div class="col-md-8">
       <h5 class="title mt-3">Lista de precios</h5>
 
-      <table class="table table-striped mt-2">
+      <table class="table table-hover mt-2">
 
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col" class="col-4">Id</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Costo</th>
+            <th scope="col" class="col-2">Costo</th>
             <th scope="col">Duracion</th>
             <th scope="col">Tiempo</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr *ngFor="let price of pricesList">
+          <tr [className]="this.idPrice === price.id ? 'table-active' : ''" 
+              *ngFor="let price of pricesList" (click)="setPricesOnForm(price)"
+              style="cursor: pointer;">
             <th scope="row"> {{ price.id }} </th>
             <td> {{price.nombre}} </td>
             <td> {{price.costo | currency}} </td>
@@ -64,9 +66,7 @@
 
       </table>
 
-    </div>
-
-    
+    </div>    
 
   </div>
 </div>

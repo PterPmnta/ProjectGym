@@ -1,5 +1,4 @@
 import { ClientsService } from './../Services/Clients.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 

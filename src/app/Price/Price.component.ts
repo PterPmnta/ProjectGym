@@ -1,30 +1,47 @@
+import { PricesModel } from './../Models/Prices.Model';
 import { MessageService } from './../Services/Message.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { PricesService } from '../Services/Prices.service';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-Price',
   templateUrl: './Price.component.html',
   styleUrls: ['./Price.component.scss']
 })
+
+
 export class PriceComponent implements OnInit {
 
   priceForm!: FormGroup
   pricesList: any[] = []
-  prices: any
+  rowPrice: boolean = false
+  idPrice: string = ""
+  btnEditPrice: boolean = false
+  updatePrice: boolean = false
+  statePriceForm: boolean = false
+
   weekDays: any = {
-    1: "Dia",
-    2: "Semana",
-    3: "Quincena",
-    4: "Mes",
-    5: "Año"
+    Dia: 1,
+    Semana: 2,
+    Quincena: 3,
+    Mes: 4,
+    Año: 5
   }
-  dataTime: any 
-  position: any
 
+  priceFormStateBox: any = {
+    nombre: false,
+    costo: false,
+    duracion: false,
+    tiempo: false
+  }
 
-  constructor(private fb: FormBuilder, private db: AngularFirestore, private msg: MessageService) { }
+  constructor(private fb: FormBuilder, 
+              private db: AngularFirestore, 
+              private msg: MessageService,
+              public dataPrices: PricesService) { }
 
   ngOnInit() {
 
@@ -35,45 +52,80 @@ export class PriceComponent implements OnInit {
       tiempo: ['', Validators.required]
     })
 
-    this.getPricesListFromDB()
+    this.pricesList = this.dataPrices.getPricesListFromDB()
 
   }
 
   savePrices(){
-    //console.log(this.priceForm.value)
-    this.db.collection('prices').add(this.priceForm.value).then(() => {
+
+    this.db.collection<PricesModel>('prices').add(this.priceForm.value).then(() => {
       this.msg.correctMessage()
+      this.dataPrices.getPricesListFromDB()
       this.priceForm.reset()
     }).catch(error => {
       this.msg.errorMessage(error)
     })
-  }
 
-  getPricesListFromDB(){
-    this.pricesList.length = 0
-    this.db.collection('prices').get().subscribe((result) => {
+  }  
 
-      this.prices = result.docs
+  isEmpty(event: any){
 
-      result.docs.forEach((dataPrice) => {
+    let controlName = event.target.getAttribute('formControlName')
 
-        this.prices = dataPrice.data()         
-        this.prices.id = dataPrice.id
-        this.prices.ref = dataPrice.ref  
+    if (event.target.value === "") {
 
-        Object.keys(this.weekDays).map((wd) => {
-          let position = Number.parseInt(wd)
-          if(wd === this.prices.tiempo){
-            this.prices.tiempo = (this.weekDays[wd])
-          }
-        })
+        if(this.btnEditPrice === true){
+          this.priceFormStateBox[controlName] = false;
+          this.updatePrice = false
+        }
+
+        if(this.btnEditPrice === false){
+          this.priceFormStateBox[controlName] = false;
+        }
+          
+
+    } else {
+
+      if(this.btnEditPrice === true){
         
-        console.log(this.prices)
+        this.priceFormStateBox[controlName] = true;  
+        
+        this.statePriceForm = Object.values(this.priceForm.value).includes("") 
+        if(this.statePriceForm === false){
+          this.updatePrice = true
+        }  
+      }
 
-        this.pricesList.push(this.prices)
+      if(this.btnEditPrice === false){
+        this.priceFormStateBox[controlName] = true;
+      }
 
-      })
+    }
+  } 
+
+  setPricesOnForm(dataFormPrice: PricesModel){
+
+    this.btnEditPrice = true
+    this.updatePrice = true
+    this.rowPrice = true
+    this.idPrice = dataFormPrice.id
+
+    Object.keys(this.weekDays).map((wd) => {   
+
+      let dd = dataFormPrice.tiempo.toString()
+      if(wd === dd){
+        dataFormPrice.tiempo = (this.weekDays[wd])
+      }
+
     })
+
+    this.priceForm.setValue({
+      nombre: dataFormPrice.nombre,
+      costo: dataFormPrice.costo,
+      duracion: dataFormPrice.duracion,
+      tiempo: dataFormPrice.tiempo
+    })
+
   }
 
 }
