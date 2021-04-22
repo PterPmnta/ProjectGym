@@ -30,8 +30,13 @@
           </select>
         </div>
 
-        <button [disabled]="!priceForm.valid || this.btnEditPrice" class="btn btn-primary mt-3 col-4" (click)= "savePrices()">Save</button>
-        <button [disabled]="this.btnEditPrice === false || this.updatePrice === false" class="btn btn-warning mt-3 ms-2 col-4">Update</button>
+        <button [disabled]="!priceForm.valid || this.btnEditPrice" class="btn btn-primary mt-3 col-4" (click)= "savePrices()">
+          Save
+        </button>
+        
+        <button [disabled]="this.btnEditPrice === false || this.updatePrice === false" class="btn btn-warning mt-3 ms-2 col-4" (click)= "updateFormPrice()">
+          Update
+        </button>
 
       </form>
 

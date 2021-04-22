@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './Login.component.html',
   styleUrls: ['./Login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
   imgLogin: string = "../../assets/img/path24.png"
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   invalidUserOrPass: string = "The password is invalid or the user does not have a password."
   Do_A_Post: string = ""
 
-  constructor(public fb: FormBuilder, firestore: AngularFirestore, public auth: AngularFireAuth, public spinner: NgxSpinnerService) { }  
+  constructor(public fb: FormBuilder, firestore: AngularFirestore, 
+              public auth: AngularFireAuth, public spinner: NgxSpinnerService) { }  
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -39,21 +41,21 @@ export class LoginComponent implements OnInit {
       this.spinner.show()  
 
       this.auth.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
-             .then((userDataLogin) => {
-              console.log(userDataLogin)
-              this.spinner.hide()
-
-      }).catch((e) => {
-
-        this.Do_A_Post = "Exists a problem with your data access."
-        this.spinner.show()
-        console.log(e)
-          this.dataInForm = false
-          if(e.message === this.invalidUserOrPass){
-            this.errorText = "El correo o contraseña son incorrectos"
-          }        
-          this.spinner.hide()       
-      })
+               .then((userDataLogin) => {
+                console.log(userDataLogin)
+                this.spinner.hide()
+  
+                }).catch((e) => {
+          
+                  this.Do_A_Post = "Exists a problem with your data access."
+                  this.spinner.show()
+                  console.log(e)
+                    this.dataInForm = false
+                    if(e.message === this.invalidUserOrPass){
+                      this.errorText = "El correo o contraseña son incorrectos"
+                    }        
+                    this.spinner.hide()       
+                })
 
     }else{
       this.dataInForm = false

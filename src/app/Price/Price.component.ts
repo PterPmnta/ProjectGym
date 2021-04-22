@@ -12,7 +12,6 @@ import { stringify } from '@angular/compiler/src/util';
   styleUrls: ['./Price.component.scss']
 })
 
-
 export class PriceComponent implements OnInit {
 
   priceForm!: FormGroup
@@ -75,25 +74,26 @@ export class PriceComponent implements OnInit {
     if (event.target.value === "") {
 
         if(this.btnEditPrice === true){
-          this.priceFormStateBox[controlName] = false;
-          this.updatePrice = false
+           this.priceFormStateBox[controlName] = false;
+           this.updatePrice = false
         }
 
         if(this.btnEditPrice === false){
-          this.priceFormStateBox[controlName] = false;
+           this.priceFormStateBox[controlName] = false;
         }
           
 
     } else {
 
       if(this.btnEditPrice === true){
-        
-        this.priceFormStateBox[controlName] = true;  
-        
-        this.statePriceForm = Object.values(this.priceForm.value).includes("") 
-        if(this.statePriceForm === false){
-          this.updatePrice = true
-        }  
+      
+          this.priceFormStateBox[controlName] = true;  
+          
+          this.statePriceForm = Object.values(this.priceForm.value).includes("") 
+          if(this.statePriceForm === false){
+            this.updatePrice = true
+          }  
+          
       }
 
       if(this.btnEditPrice === false){
@@ -127,5 +127,18 @@ export class PriceComponent implements OnInit {
     })
 
   }
+  
+  updateFormPrice(): void{
+    this.db.doc(`prices/${this.idPrice}`).update(this.priceForm.value).then(() => {
+      this.msg.updateMessage()
+      this.priceForm.reset()
+      this.dataPrices.getPricesListFromDB()
+      this.btnEditPrice = false
+      this.updatePrice = false
+    }).catch((error) => {
+      this.msg.errorMessage(error)
+    })
+  }
+  
 
 }
