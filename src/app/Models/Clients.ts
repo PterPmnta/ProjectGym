@@ -1,5 +1,7 @@
-import { DocumentReference } from "@angular/fire/firestore"
-export class Client{
+import { DocumentReference } from '@angular/fire/firestore';
+import { IClients } from './IClients';
+export class Client implements IClients{
+
 
   Nombre: string = ""
   Apellido: string = ""
