@@ -1,3 +1,4 @@
+import { DocumentReference } from "@angular/fire/firestore"
 export class Client{
 
   Nombre: string = ""
@@ -7,6 +8,8 @@ export class Client{
   email: string = ""
   Fecha_N!: Date
   Imagen: string = ""
+  id: string = ""
+  ref!: DocumentReference
 
   constructor(){}
 
