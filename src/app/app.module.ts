@@ -29,9 +29,10 @@ import { PriceComponent } from './Price/Price.component';
 import { RegisterComponent } from './Register/Register.component';
 import { AddPriceComponent } from './AddPrice/AddPrice.component';
 import { ListPricesComponent } from './ListPrices/ListPrices.component';
+import { ListUserRegisterComponent } from './ListUserRegister/ListUserRegister.component';
 
 @NgModule({
-  declarations: [									
+  declarations: [										
     AppComponent,
     LoginComponent,
     HeadComponent,
@@ -41,7 +42,8 @@ import { ListPricesComponent } from './ListPrices/ListPrices.component';
     PriceComponent,
       RegisterComponent,
       AddPriceComponent,
-      ListPricesComponent
+      ListPricesComponent,
+      ListUserRegisterComponent
    ],
   imports: [
     BrowserModule,

@@ -173,15 +173,7 @@ export class AddClientComponent implements OnInit {
 
         this.messagesAlert.updateMessage()
         this.clientsDataServices.getClientsFromDB()
-        this.clientForm.setValue({
-          Nombre: "",
-          Apellido: "",
-          Telefono: "",
-          Cedula: "",
-          email: "",
-          Fecha_N: "",
-          Imagen: ''
-        })
+        this.clientForm.reset()
 
       }).catch((error) => {
         this.messagesAlert.errorMessage(error)

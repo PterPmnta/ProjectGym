@@ -3,15 +3,15 @@
   <form class="mt-2" [formGroup] = "priceForm">
 
     <div class="form-group">
-      <input type="text" class="form-control mt-2" placeholder="Nombre" formControlName="nombre" (input) = isEmpty($event)>
+      <input type="text" class="form-control mt-2" placeholder="Nombre" formControlName="nombre" (input) = isEmptyPrice($event)>
     </div>
 
     <div class="form-group">
-      <input type="number" class="form-control mt-2" placeholder="Costo" formControlName="costo" (input) = isEmpty($event)>
+      <input type="number" class="form-control mt-2" placeholder="Costo" formControlName="costo" (input) = isEmptyPrice($event)>
     </div>
 
     <div class="form-group">
-      <input type="number" class="form-control mt-2" placeholder="Duracion" formControlName="duracion" (input) = isEmpty($event)>
+      <input type="number" class="form-control mt-2" placeholder="Duracion" formControlName="duracion" (input) = isEmptyPrice($event)>
     </div>
 
     <div class="form-group">
