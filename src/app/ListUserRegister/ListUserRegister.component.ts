@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Client } from '../Models/Clients';
 
 @Component({
   selector: 'app-ListUserRegister',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ListUserRegister.component.scss']
 })
 export class ListUserRegisterComponent implements OnInit {
+
+  client: Client[] = []
 
   constructor() { }
 

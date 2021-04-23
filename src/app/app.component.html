@@ -4,10 +4,6 @@
   <div *ngIf="auth.user | async as user; else showLogin">
 
     <app-Head ></app-Head>
-
-   <!-- <h1>Hello {{ user.email }}!</h1>
-    <button (click)="logout()">Logout</button> -->
-
     <router-outlet></router-outlet>
 
   </div>
@@ -15,9 +11,9 @@
   <ng-template #showLogin >
     <div *ngIf="loading">
       <ngx-spinner
-      bdColor = "rgba(175,165,157,0.8)" 
-      size = "large" color = "#69a7e1" 
-      type = "ball-scale-multiple" 
+      bdColor = "rgba(175,165,157,0.8)"
+      size = "large" color = "#69a7e1"
+      type = "ball-scale-multiple"
       [fullScreen] = "true">
       <p style="color: white">
         Loading...
