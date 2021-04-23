@@ -1,14 +1,25 @@
 import { PricesModel } from './../Models/Prices.Model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class PricesService {
+
+  priceDataFromList: any = new Subject();
 
   pricesList: PricesModel[] = []
   prices: any
+
+  btnEditPrice: boolean = false
+  updatePrice: boolean = false
+  rowPrice: boolean = false
+  idPrice: string = ""
+
   weekDays: any = {
     1: "Dia",
     2: "Semana",
@@ -17,9 +28,11 @@ export class PricesService {
     5: "Año"
   }
 
-  constructor(private db: AngularFirestore) { }
+ constructor(private db: AngularFirestore) { }
 
   getPricesListFromDB(){
+
+    console.log("servicio traer de la db precios")
 
     this.pricesList.length = 0
 
@@ -29,14 +42,15 @@ export class PricesService {
 
       result.docs.forEach((dataPrice) => {
 
-        this.prices = dataPrice.data()         
+        this.prices = dataPrice.data()
         this.prices.id = dataPrice.id
-        this.prices.ref = dataPrice.ref  
+        this.prices.ref = dataPrice.ref
 
         Object.keys(this.weekDays).map((wd) => {
+
           let position = Number.parseInt(wd)
-          if(wd === this.prices.tiempo){
-            this.prices.tiempo = (this.weekDays[wd])
+          if(position === Number.parseInt(this.prices.tiempo)){
+            this.prices.tiempo = (this.weekDays[position])
           }
         })
         this.pricesList.push(this.prices)

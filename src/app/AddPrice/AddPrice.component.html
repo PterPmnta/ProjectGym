@@ -1,3 +1,38 @@
-<p>
-  AddPrice works!
-</p>
+
+  <h5 class="title mt-3">Formulario registro de precios</h5>
+  <form class="mt-2" [formGroup] = "priceForm">
+
+    <div class="form-group">
+      <input type="text" class="form-control mt-2" placeholder="Nombre" formControlName="nombre" (input) = isEmpty($event)>
+    </div>
+
+    <div class="form-group">
+      <input type="number" class="form-control mt-2" placeholder="Costo" formControlName="costo" (input) = isEmpty($event)>
+    </div>
+
+    <div class="form-group">
+      <input type="number" class="form-control mt-2" placeholder="Duracion" formControlName="duracion" (input) = isEmpty($event)>
+    </div>
+
+    <div class="form-group">
+      <select class="form-select mt-2" formControlName="tiempo" >
+        <option value="" disabled selected hidden>Seleccion una opcion de tiempo</option>
+        <option value="1">Dia</option>
+        <option value="2">Semana</option>
+        <option value="3">Quincena</option>
+        <option value="4">Mes</option>
+        <option value="5">Año</option>
+      </select>
+    </div>
+
+    <button [disabled]="!priceForm.valid || this.btnEditPrice" class="btn btn-primary mt-3 col-4" (click)= "savePrices()">
+      Save
+    </button>
+
+    <button [disabled]="this.btnEditPrice === false || this.updatePrice === false" class="btn btn-warning mt-3 ms-2 col-4" (click)= "updateFormPrice()">
+      Update
+    </button>
+
+  </form>
+
+

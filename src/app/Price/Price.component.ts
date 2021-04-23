@@ -1,10 +1,7 @@
 import { PricesModel } from './../Models/Prices.Model';
-import { MessageService } from './../Services/Message.service';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { PricesService } from '../Services/Prices.service';
-import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-Price',
@@ -37,71 +34,9 @@ export class PriceComponent implements OnInit {
     tiempo: false
   }
 
-  constructor(private fb: FormBuilder, 
-              private db: AngularFirestore, 
-              private msg: MessageService,
-              public dataPrices: PricesService) { }
+  constructor(public dataPrices: PricesService) { }
 
-  ngOnInit() {
-
-    this.priceForm = this.fb.group({
-      nombre: ['', Validators.required],
-      costo: ['', Validators.required],
-      duracion: ['', Validators.required],
-      tiempo: ['', Validators.required]
-    })
-
-    this.pricesList = this.dataPrices.getPricesListFromDB()
-
-  }
-
-  savePrices(){
-
-    this.db.collection<PricesModel>('prices').add(this.priceForm.value).then(() => {
-      this.msg.correctMessage()
-      this.dataPrices.getPricesListFromDB()
-      this.priceForm.reset()
-    }).catch(error => {
-      this.msg.errorMessage(error)
-    })
-
-  }  
-
-  isEmpty(event: any){
-
-    let controlName = event.target.getAttribute('formControlName')
-
-    if (event.target.value === "") {
-
-        if(this.btnEditPrice === true){
-           this.priceFormStateBox[controlName] = false;
-           this.updatePrice = false
-        }
-
-        if(this.btnEditPrice === false){
-           this.priceFormStateBox[controlName] = false;
-        }
-          
-
-    } else {
-
-      if(this.btnEditPrice === true){
-      
-          this.priceFormStateBox[controlName] = true;  
-          
-          this.statePriceForm = Object.values(this.priceForm.value).includes("") 
-          if(this.statePriceForm === false){
-            this.updatePrice = true
-          }  
-          
-      }
-
-      if(this.btnEditPrice === false){
-        this.priceFormStateBox[controlName] = true;
-      }
-
-    }
-  } 
+  ngOnInit() {}
 
   setPricesOnForm(dataFormPrice: PricesModel){
 
@@ -110,7 +45,7 @@ export class PriceComponent implements OnInit {
     this.rowPrice = true
     this.idPrice = dataFormPrice.id
 
-    Object.keys(this.weekDays).map((wd) => {   
+    Object.keys(this.weekDays).map((wd) => {
 
       let dd = dataFormPrice.tiempo.toString()
       if(wd === dd){
@@ -127,18 +62,6 @@ export class PriceComponent implements OnInit {
     })
 
   }
-  
-  updateFormPrice(): void{
-    this.db.doc(`prices/${this.idPrice}`).update(this.priceForm.value).then(() => {
-      this.msg.updateMessage()
-      this.priceForm.reset()
-      this.dataPrices.getPricesListFromDB()
-      this.btnEditPrice = false
-      this.updatePrice = false
-    }).catch((error) => {
-      this.msg.errorMessage(error)
-    })
-  }
-  
+
 
 }

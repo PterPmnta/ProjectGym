@@ -1,3 +1,27 @@
-<p>
-  ListPrices works!
-</p>
+<h5 class="title mt-3">Lista de precios</h5>
+
+      <table class="table table-hover mt-2">
+
+        <thead>
+          <tr>
+            <th scope="col" class="col-4">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col" class="col-2">Costo</th>
+            <th scope="col">Duracion</th>
+            <th scope="col">Tiempo</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr [className]="this.idPrice === price.id ? 'table-active' : ''"
+              *ngFor="let price of pricesList" (click)="sendDataPrices(price)"
+              style="cursor: pointer;">
+            <th scope="row"> {{ price.id }} </th>
+            <td> {{price.nombre}} </td>
+            <td> {{price.costo | currency}} </td>
+            <td> {{price.duracion}} </td>
+            <td> {{price.tiempo}} </td>
+          </tr>
+        </tbody>
+
+      </table>

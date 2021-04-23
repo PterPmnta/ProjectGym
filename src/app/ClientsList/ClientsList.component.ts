@@ -12,21 +12,21 @@ export class ClientsListComponent implements OnInit {
 
   imageProfile: string = "../../assets/img/profilemale1.png"
   clientsList: any[] = []
-  client: any  
+  client: any
   Id: string = ""
   clickOnEditButton: boolean = false
 
   @Output() searchByClientId = new EventEmitter()
-  
-  constructor(private firestore: AngularFirestore, 
+
+  constructor(private firestore: AngularFirestore,
               public clientsDataServices: ClientsService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
 
     this.clientsList.length = 0
     this.clientsList = this.clientsDataServices.getClientsFromDB()
 
-  }  
+  }
 
   searchClients(event: any){
    /* let productFind: string = event.target.value
@@ -35,7 +35,7 @@ export class ClientsListComponent implements OnInit {
     }) */
   }
 
-  sendClientId(id: string){     
+  sendClientId(id: string){
     this.Id = id
     this.clientsDataServices.clientIdFromList.next(this.Id)
   }
