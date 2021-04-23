@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {  Subject } from 'rxjs';
+import { Client } from '../Models/Clients';
 
 @Injectable({
   providedIn: 'root'
@@ -8,25 +9,25 @@ import {  Subject } from 'rxjs';
 
 export class ClientsService {
 
-  clientsList: any[] = []
-  client: any 
+  clientsList: Client[] = [];
+  client: any
 
   clientIdFromList: any = new Subject();
 
   constructor(private firestore: AngularFirestore) { }
 
-  getClientsFromDB(){ 
+  getClientsFromDB(){
 
     this.clientsList.length = 0
     this.firestore.collection('clients').get().subscribe((list) => {
-      
+
       this.client = list.docs
 
       list.docs.forEach(element => {
 
         this.client = element.data()
         this.client.id = element.id
-        this.client.ref = element.ref 
+        this.client.ref = element.ref
         this.clientsList.push(this.client)
 
       })
