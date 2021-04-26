@@ -1,4 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
+import { Client } from '../Models/Clients';
+import { Inscription } from '../Models/Inscription';
 
 @Component({
   selector: 'app-Register',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
+  clientInscription: Inscription = new Inscription();
+  clientSelected: Client = new Client();
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  setDataClient(client: Client){
+    this.clientInscription.ClientRef = client.ref
+    this.clientSelected = client
   }
 
 }
