@@ -25,6 +25,7 @@
     "@types/angularfire": "^0.8.34",
     "@types/firebase": "^3.2.1",
     "bootstrap": "^5.0.0-beta3",
+    "bootstrap-icons": "^1.4.1",
     "firebase": "^7.0 || ^8.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-spinner": "^11.0.1",

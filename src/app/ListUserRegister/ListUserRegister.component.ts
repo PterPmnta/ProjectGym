@@ -14,6 +14,9 @@ export class ListUserRegisterComponent implements OnInit {
   backUpClientList: Client[] = new Array<Client>();
   fullName: string = ""
 
+  cancelState: boolean = false
+  findState: boolean = true
+
   @Output('sendDataClient') sendDataClient = new EventEmitter()
   @Output('cancelClientInscription') cancelClientInscription = new EventEmitter()
 
@@ -21,6 +24,7 @@ export class ListUserRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.clientList = this.dataClient.getClientsFromDB()
+    this.backUpClientList = this.clientList
   }
 
   searchUser(event: any){
@@ -32,12 +36,10 @@ export class ListUserRegisterComponent implements OnInit {
     }
 
     if(userToFind === ""){
-      this.cancelClientInscription.emit()
       this.clientList = this.backUpClientList
     }
 
     if(event.inputType === 'deleteContentBackward' || event.inputType === 'deleteContentForward'){
-      this.cancelClientInscription.emit()
       this.clientList = this.backUpClientList
       this.filterUsers(userToFind)
     }
@@ -53,8 +55,17 @@ export class ListUserRegisterComponent implements OnInit {
   }
 
   selectClient(client: Client){
+    this.clientList = this.backUpClientList
+    this.cancelState = true
+    this.findState = false
     this.fullName = (`${client.Nombre} ${client.Apellido}`)
     this.sendDataClient.emit(client)
+  }
+
+  clearClient(){
+    this.cancelState = false
+    this.findState = true
+    this.fullName = ""
   }
 
 }

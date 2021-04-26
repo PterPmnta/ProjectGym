@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
 
   dataClientReset(){
     this.inscriptionState = false
+    this.clientSelected = new Client()
   }
 
 }

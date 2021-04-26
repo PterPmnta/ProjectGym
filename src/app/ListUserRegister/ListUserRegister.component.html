@@ -1,8 +1,16 @@
 
 <h5>Clientes</h5>
 
-<div class="form-group mt-3">
-  <input type="text" placeholder="Escriba el cliente que desea buscar" class="form-control" (input)=searchUser($event) [(ngModel)]="fullName">
+<div class="form-group mt-3 row">
+  <div class="col-10">
+    <input type="text" placeholder="Escriba el cliente que desea buscar"
+           class="form-control"
+           (input)=searchUser($event) [(ngModel)]="fullName"
+           [disabled]="this.findState === false">
+  </div>
+  <div class="col-2">
+    <button [disabled]="this.cancelState === false" class="btn btn-danger" (click)="clearClient()"><i class="bi bi-x-circle"></i></button>
+  </div>
 </div>
 
 <div class="list-group list-group-flush mt-3" style="cursor: pointer;">
