@@ -6,6 +6,14 @@
           (sendDataClient)="setDataClient($event)"
           (cancelClientInscription)="dataClientReset()">
       </app-ListUserRegister>
+
+      <div class="col-6 mt-3">
+        <button [disabled]="this.inscriptionState === false" class="btn btn-success" (click)="saveClient()">
+          <i class="bi bi-save me-3"></i>
+          Save
+        </button>
+      </div>
+
     </div>
 
     <div class="col-6">

@@ -66,6 +66,7 @@ export class ListUserRegisterComponent implements OnInit {
     this.cancelState = false
     this.findState = true
     this.fullName = ""
+    this.cancelClientInscription.emit()
   }
 
 }

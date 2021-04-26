@@ -30,4 +30,8 @@ export class RegisterComponent implements OnInit {
     this.clientSelected = new Client()
   }
 
+  saveClient(){
+    console.log(this.clientInscription)
+  }
+
 }
