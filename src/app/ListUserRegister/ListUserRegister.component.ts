@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Client } from '../Models/Clients';
 import { ClientsService } from '../Services/Clients.service';
 
@@ -14,7 +14,7 @@ export class ListUserRegisterComponent implements OnInit {
   backUpClientList: Client[] = new Array<Client>();
   fullName: string = ""
 
-  @Output() ('sendDataClient') sendDataClient = new EventEmitter()
+  @Output('sendDataClient') sendDataClient = new EventEmitter()
 
   constructor(public dataClient: ClientsService) { }
 
@@ -50,7 +50,6 @@ export class ListUserRegisterComponent implements OnInit {
 
   selectClient(client: Client){
     this.fullName = (`${client.Nombre} ${client.Apellido}`)
-
     this.sendDataClient.emit(client)
   }
 
