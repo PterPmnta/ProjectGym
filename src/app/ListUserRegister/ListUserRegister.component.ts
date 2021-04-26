@@ -15,6 +15,7 @@ export class ListUserRegisterComponent implements OnInit {
   fullName: string = ""
 
   @Output('sendDataClient') sendDataClient = new EventEmitter()
+  @Output('cancelClientInscription') cancelClientInscription = new EventEmitter()
 
   constructor(public dataClient: ClientsService) { }
 
@@ -31,15 +32,18 @@ export class ListUserRegisterComponent implements OnInit {
     }
 
     if(userToFind === ""){
+      this.cancelClientInscription.emit()
       this.clientList = this.backUpClientList
     }
 
     if(event.inputType === 'deleteContentBackward' || event.inputType === 'deleteContentForward'){
+      this.cancelClientInscription.emit()
       this.clientList = this.backUpClientList
       this.filterUsers(userToFind)
     }
 
     this.filterUsers(userToFind)
+
   }
 
   filterUsers(userToFind: string){
