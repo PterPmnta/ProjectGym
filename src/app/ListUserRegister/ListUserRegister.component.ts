@@ -46,8 +46,9 @@ export class ListUserRegisterComponent implements OnInit {
     })
   }
 
-  selectClient(Nombre: string,Apellido: string){
-    this.prueba = (`${Nombre} ${Apellido}`)
+  selectClient(client: Client){
+    //console.log(client)
+    this.prueba = (`${client.Nombre} ${client.Apellido}`)
   }
 
 }
