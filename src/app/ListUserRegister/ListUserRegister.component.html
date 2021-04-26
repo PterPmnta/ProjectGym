@@ -2,10 +2,13 @@
 <h5>Clientes</h5>
 
 <div class="form-group mt-3">
-  <input type="text" placeholder="Escriba el cliente que desea buscar" class="form-control" (input)=searchUser($event)>
+  <input type="text" placeholder="Escriba el cliente que desea buscar" class="form-control" (input)=searchUser($event) [(ngModel)]="prueba">
 </div>
 
 <div class="list-group list-group-flush mt-3" style="cursor: pointer;">
-  <a type="button" class="list-group-item list-group-item-action" *ngFor="let client of clientList"> {{ client.Nombre }} {{ client.Apellido}} </a>
+  <a type="button" class="list-group-item list-group-item-action" *ngFor="let client of clientList"
+     (click)="selectClient(client.Nombre, client.Apellido)">
+      {{ client.Nombre }} {{ client.Apellido}}
+  </a>
 </div>
 

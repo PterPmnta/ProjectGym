@@ -7,10 +7,12 @@ import { ClientsService } from '../Services/Clients.service';
   templateUrl: './ListUserRegister.component.html',
   styleUrls: ['./ListUserRegister.component.scss']
 })
+
 export class ListUserRegisterComponent implements OnInit {
 
   clientList: Client[] = new Array<Client>();
   backUpClientList: Client[] = new Array<Client>();
+  prueba: string = ""
 
   constructor(public dataClient: ClientsService) { }
 
@@ -42,6 +44,10 @@ export class ListUserRegisterComponent implements OnInit {
     this.clientList = this.clientList.filter(client =>{
       return client.Nombre.toLowerCase().includes(userToFind.toLowerCase())
     })
+  }
+
+  selectClient(Nombre: string,Apellido: string){
+    this.prueba = (`${Nombre} ${Apellido}`)
   }
 
 }
