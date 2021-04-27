@@ -2,6 +2,7 @@
   <div class="row mt-3">
 
     <div class="col-6">
+
       <app-ListUserRegister
           (sendDataClient)="setDataClient($event)"
           (cancelClientInscription)="dataClientReset()">
@@ -9,8 +10,8 @@
 
       <div class="col-6 mt-3">
         <div class="form-group">
-          <select class="form-select mt-2" (change)="choosePrice($event)">
-            <option value="" disabled selected hidden>Seleccion una opcion</option>
+          <select [(ngModel)]="idValue" class="form-select mt-2" (change)="choosePrice($event)">
+            <option [value]= "null" disabled selected hidden>Seleccion una opcion</option>
             <option *ngFor="let price of pricesList" [value]="price.id">
               {{ price.tiempo }}
             </option>
@@ -33,7 +34,7 @@
       <div class="col-6 mt-3">
         <button [disabled]="this.inscriptionState === false || this.dataDateState === false" class="btn btn-success" (click)="saveClient()">
           <i class="bi bi-save me-3"></i>
-          Save
+            Save
         </button>
       </div>
 

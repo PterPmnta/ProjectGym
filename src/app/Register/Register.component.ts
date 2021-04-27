@@ -1,9 +1,11 @@
+import { MessageService } from './../Services/Message.service';
 import { PricesService } from './../Services/Prices.service';
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../Models/Clients';
 import { Inscription } from '../Models/Inscription';
 import { PricesModel } from '../Models/Prices.Model';
 import { S_DateService } from '../Services/S_Date.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-Register',
@@ -22,7 +24,12 @@ export class RegisterComponent implements OnInit {
   inscriptionState: boolean = false
   dataDateState: boolean = false
 
-  constructor(public dataFromPrice: PricesService, public actionsFromDate: S_DateService) { }
+  idValue: string = 'null'
+
+  constructor(public dataFromPrice: PricesService,
+              public actionsFromDate: S_DateService,
+              public db: AngularFirestore,
+              public msg: MessageService) { }
 
   ngOnInit() {
     this.pricesList = this.dataFromPrice.getPricesListFromDB()
@@ -43,7 +50,22 @@ export class RegisterComponent implements OnInit {
   }
 
   saveClient(){
-    console.log(this.clientInscription)
+
+    let inscriptionToSave = {
+      StartDate: this.clientInscription.StartDate,
+      EndDate: this.clientInscription.EndDate,
+      PayInscription: this.clientInscription.PayInscription,
+      ClientRef: this.clientInscription.ClientRef,
+      PriceInscription: this.clientInscription.PriceInscription
+    }
+
+    this.db.collection('inscriptions').add(inscriptionToSave).then((result) => {
+      console.log(result)
+      this.msg.correctMessage()
+      this.idValue = 'null'
+      this.dataClientReset()
+    })
+
   }
 
   choosePrice(event: any){
