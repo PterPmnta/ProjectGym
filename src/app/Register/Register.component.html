@@ -27,7 +27,7 @@
       </div>
 
       <div class="col-6 mt-3">
-        <button [disabled]="this.inscriptionState === false" class="btn btn-success" (click)="saveClient()">
+        <button [disabled]="this.inscriptionState === false || this.dataDateState === false" class="btn btn-success" (click)="saveClient()">
           <i class="bi bi-save me-3"></i>
           Save
         </button>

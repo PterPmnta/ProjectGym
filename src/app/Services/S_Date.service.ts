@@ -19,10 +19,6 @@ export class S_DateService {
 constructor() { }
 
   getDays(tiempo: string, duracion: number){
-
-    //console.log(typeof(tiempo), `- ${tiempo}`)
-    //console.log(typeof(duracion), `- ${duracion}`)
-
     let dayPlus, monthPlus, yearPlus, dataBeginDate
 
     if(tiempo === "Dia"){
@@ -39,17 +35,49 @@ constructor() { }
 
     if(tiempo === "Semana"){
 
+      dataBeginDate = new Date()
+      yearPlus = dataBeginDate.getFullYear()
+      monthPlus = dataBeginDate.getMonth()
+      dayPlus = dataBeginDate.getDate() + (duracion * 7)
+
+      this.endDate = new Date(yearPlus, monthPlus, dayPlus)
+      return this.endDate
+
     }
 
     if(tiempo === "Quincena"){
+
+      dataBeginDate = new Date()
+      yearPlus = dataBeginDate.getFullYear()
+      monthPlus = dataBeginDate.getMonth()
+      dayPlus = dataBeginDate.getDate() + (duracion * 15)
+
+      this.endDate = new Date(yearPlus, monthPlus, dayPlus)
+      return this.endDate
 
     }
 
     if(tiempo === "Mes"){
 
+      dataBeginDate = new Date()
+      yearPlus = dataBeginDate.getFullYear()
+      monthPlus = dataBeginDate.getMonth() + duracion
+      dayPlus = dataBeginDate.getDate()
+
+      this.endDate = new Date(yearPlus, monthPlus, dayPlus)
+      return this.endDate
+
     }
 
     if(tiempo === "Año"){
+
+      dataBeginDate = new Date()
+      yearPlus = dataBeginDate.getFullYear() + duracion
+      monthPlus = dataBeginDate.getMonth()
+      dayPlus = dataBeginDate.getDate()
+
+      this.endDate = new Date(yearPlus, monthPlus, dayPlus)
+      return this.endDate
 
     }
 

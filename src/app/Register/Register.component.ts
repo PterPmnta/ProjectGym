@@ -5,7 +5,6 @@ import { Inscription } from '../Models/Inscription';
 import { PricesModel } from '../Models/Prices.Model';
 import { S_DateService } from '../Services/S_Date.service';
 
-
 @Component({
   selector: 'app-Register',
   templateUrl: './Register.component.html',
@@ -21,6 +20,7 @@ export class RegisterComponent implements OnInit {
   pricesList: any[] = [];
 
   inscriptionState: boolean = false
+  dataDateState: boolean = false
 
   weekDays: any = {
     Dia: 1,
@@ -40,10 +40,13 @@ export class RegisterComponent implements OnInit {
     this.inscriptionState = true
     this.clientInscription.ClientRef = client.ref
     this.clientSelected = client
+    console.log(this.inscriptionState)
+    console.log(this.dataDateState)
   }
 
   dataClientReset(){
     this.inscriptionState = false
+    this.dataDateState = false
     this.clientSelected = new Client()
     this.clientInscription = new Inscription()
   }
@@ -53,6 +56,8 @@ export class RegisterComponent implements OnInit {
   }
 
   choosePrice(event: any){
+
+    this.dataDateState = true
 
     let id = event.target.value
     this.selectedPrice = this.pricesList.find(data => data.id === id)
