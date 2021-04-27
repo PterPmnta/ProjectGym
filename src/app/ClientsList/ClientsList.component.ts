@@ -1,6 +1,5 @@
 import { ClientsService } from './../Services/Clients.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-ClientsList',
@@ -18,8 +17,7 @@ export class ClientsListComponent implements OnInit {
 
   @Output() searchByClientId = new EventEmitter()
 
-  constructor(private firestore: AngularFirestore,
-              public clientsDataServices: ClientsService) { }
+  constructor(public clientsDataServices: ClientsService) { }
 
   ngOnInit() {
 

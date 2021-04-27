@@ -11,6 +11,7 @@ export class PricesService {
 
   priceDataFromList: any = new Subject();
 
+  //pricesList: PricesModel = new PricesModel()
   pricesList: PricesModel[] = []
   prices: any
 

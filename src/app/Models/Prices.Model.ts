@@ -1,5 +1,6 @@
 import { DocumentReference } from "@angular/fire/firestore"
-export class PricesModel{
+import { IPrices } from "./IPrices"
+export class PricesModel implements IPrices{
 
     id: string = ""
     nombre: string =""

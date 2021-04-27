@@ -43,7 +43,6 @@ export class AddClientComponent implements OnInit {
                 this.searchClientById()
               }
 
-
   ngOnInit() {
 
     this.clientForm = this.fb.group({
