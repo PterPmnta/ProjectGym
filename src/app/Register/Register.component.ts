@@ -22,14 +22,6 @@ export class RegisterComponent implements OnInit {
   inscriptionState: boolean = false
   dataDateState: boolean = false
 
-  weekDays: any = {
-    Dia: 1,
-    Semana: 7,
-    Quincena: 15,
-    Mes: 30,
-    Año: 365
-  }
-
   constructor(public dataFromPrice: PricesService, public actionsFromDate: S_DateService) { }
 
   ngOnInit() {
@@ -68,6 +60,7 @@ export class RegisterComponent implements OnInit {
     this.pricesList.find((data) => {
       if(data.id === id){
         this.clientInscription.EndDate = this.actionsFromDate.getDays(data.tiempo, data.duracion)
+        this.clientInscription.PayInscription = data.costo
       }
     })
 

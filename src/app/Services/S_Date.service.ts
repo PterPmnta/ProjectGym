@@ -38,7 +38,7 @@ constructor() { }
       dataBeginDate = new Date()
       yearPlus = dataBeginDate.getFullYear()
       monthPlus = dataBeginDate.getMonth()
-      dayPlus = dataBeginDate.getDate() + (duracion * 7)
+      dayPlus = dataBeginDate.getDate() + (duracion * this.weekDays.Semana)
 
       this.endDate = new Date(yearPlus, monthPlus, dayPlus)
       return this.endDate
@@ -50,7 +50,7 @@ constructor() { }
       dataBeginDate = new Date()
       yearPlus = dataBeginDate.getFullYear()
       monthPlus = dataBeginDate.getMonth()
-      dayPlus = dataBeginDate.getDate() + (duracion * 15)
+      dayPlus = dataBeginDate.getDate() + (duracion * this.weekDays.Quincena)
 
       this.endDate = new Date(yearPlus, monthPlus, dayPlus)
       return this.endDate
