@@ -32,8 +32,6 @@ export class RegisterComponent implements OnInit {
     this.inscriptionState = true
     this.clientInscription.ClientRef = client.ref
     this.clientSelected = client
-    console.log(this.inscriptionState)
-    console.log(this.dataDateState)
   }
 
   dataClientReset(){
@@ -41,6 +39,7 @@ export class RegisterComponent implements OnInit {
     this.dataDateState = false
     this.clientSelected = new Client()
     this.clientInscription = new Inscription()
+    this.selectedPrice = new PricesModel()
   }
 
   saveClient(){
