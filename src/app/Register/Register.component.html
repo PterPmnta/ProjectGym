@@ -8,6 +8,17 @@
       </app-ListUserRegister>
 
       <div class="col-6 mt-3">
+        <div class="form-group">
+          <select class="form-select mt-2" (change)="choosePrice($event)">
+            <option value="" disabled selected hidden>Seleccion una opcion</option>
+            <option *ngFor="let price of pricesList" [value]="price.id">
+              {{ price.tiempo }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-6 mt-3">
         <button [disabled]="this.inscriptionState === false" class="btn btn-success" (click)="saveClient()">
           <i class="bi bi-save me-3"></i>
           Save

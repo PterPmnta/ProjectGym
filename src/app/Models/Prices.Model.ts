@@ -6,7 +6,7 @@ export class PricesModel{
     costo: number = 0
     duracion: number = 0
     tiempo: number = 0
-    referencia!: DocumentReference
+    ref!: DocumentReference
 
     constructor(){}
 

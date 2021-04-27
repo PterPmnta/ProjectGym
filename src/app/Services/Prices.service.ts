@@ -1,7 +1,6 @@
 import { PricesModel } from './../Models/Prices.Model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -31,8 +30,6 @@ export class PricesService {
  constructor(private db: AngularFirestore) { }
 
   getPricesListFromDB(){
-
-    console.log("servicio traer de la db precios")
 
     this.pricesList.length = 0
 

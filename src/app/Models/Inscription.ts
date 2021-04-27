@@ -7,6 +7,11 @@ export class Inscription implements Inscription_Interface{
   ClientRef!: DocumentReference
   PriceInscription!: DocumentReference
 
-  constructor(){}
+  constructor(){
+    this.StartDate = this.StartDate
+    this.EndDate = this.EndDate
+    this.ClientRef = this.ClientRef
+    this.PriceInscription = this.PriceInscription
+  }
 
 }
