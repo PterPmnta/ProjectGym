@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
   selectedPrice: PricesModel = new PricesModel()
 
   pricesList: any[] = [];
-  suscriptionsList: any[] = []
 
   inscriptionState: boolean = false
   dataDateState: boolean = false
@@ -32,13 +31,10 @@ export class RegisterComponent implements OnInit {
   constructor(public dataFromPrice: PricesService,
               public actionsFromDate: S_DateService,
               public db: AngularFirestore,
-              public msg: MessageService,
-              public dataFromInscription: InscriptionsService) { }
+              public msg: MessageService) { }
 
   ngOnInit() {
     this.pricesList = this.dataFromPrice.getPricesListFromDB()
-    this.suscriptionsList = this.dataFromInscription.getUsersInscriptions()
-    console.log(this.suscriptionsList)
   }
 
   setDataClient(client: Client){

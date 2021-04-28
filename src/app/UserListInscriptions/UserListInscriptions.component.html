@@ -13,11 +13,11 @@
   </thead>
 
   <tbody>
-    <tr style="cursor: pointer;">
+    <tr style="cursor: pointer;" *ngFor="let suscription of suscriptionsList">
       <th scope="row"> uno </th>
       <td> dos </td>
       <td> tres </td>
-      <td> cuatro </td>
+      <td> {{suscription.EndDate.seconds}}</td>
       <td> cinco </td>
     </tr>
   </tbody>

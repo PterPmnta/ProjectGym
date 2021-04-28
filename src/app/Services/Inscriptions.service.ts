@@ -24,16 +24,14 @@ export class InscriptionsService {
         this.userList = dataInscription.data()
         this.userList.id = dataInscription.id
         //this.userList.ref = dataInscription.ref
-        this.db.doc(dataInscription.data().ClientRef.path).get().subscribe((cliente) => {
-           this.userList.cliente = cliente.data()
-           this.userListInscriptions.push(this.userList)
+        this.userList.client = this.db.doc(dataInscription.data().ClientRef.path).get().subscribe((cliente) => {
+           let data: any = cliente.data()
         })
-
+        this.userListInscriptions.push(this.userList)
       })
 
     })
     return this.userListInscriptions
-
   }
 
 }

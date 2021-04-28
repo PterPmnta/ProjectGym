@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InscriptionsService } from '../Services/Inscriptions.service';
 
 @Component({
   selector: 'app-UserListInscriptions',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListInscriptionsComponent implements OnInit {
 
-  constructor() { }
+  suscriptionsList: any[] = []
+
+  constructor(public dataFromInscription: InscriptionsService) { }
 
   ngOnInit() {
+    this.suscriptionsList = this.dataFromInscription.getUsersInscriptions()
+    console.log(this.suscriptionsList)
   }
 
 }
