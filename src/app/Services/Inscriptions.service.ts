@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { of, from, Observable } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Inscription } from '../Models/Inscription';
 import { Client } from '../Models/Clients';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,9 +16,9 @@ import { Client } from '../Models/Clients';
 export class InscriptionsService {
 
   userListInscriptions: Inscription[] = []
-  userList: any
+  userList: any = {}
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {}
 
   getUsersInscriptions(): Observable<Inscription> {
 

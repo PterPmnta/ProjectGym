@@ -7,6 +7,7 @@ import { InscriptionsService } from '../Services/Inscriptions.service';
   templateUrl: './UserListInscriptions.component.html',
   styleUrls: ['./UserListInscriptions.component.css']
 })
+
 export class UserListInscriptionsComponent implements OnInit {
 
   suscriptionsList: Inscription[] = []
