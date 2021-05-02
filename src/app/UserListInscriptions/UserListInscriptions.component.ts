@@ -6,6 +6,7 @@ import { InscriptionsService } from '../Services/Inscriptions.service';
   templateUrl: './UserListInscriptions.component.html',
   styleUrls: ['./UserListInscriptions.component.css']
 })
+
 export class UserListInscriptionsComponent implements OnInit {
 
   suscriptionsList: any[] = []
@@ -13,8 +14,9 @@ export class UserListInscriptionsComponent implements OnInit {
   constructor(public dataFromInscription: InscriptionsService) { }
 
   ngOnInit() {
-    this.suscriptionsList = this.dataFromInscription.getUsersInscriptions()
-    console.log(this.suscriptionsList)
+    // this.suscriptionsList = this.dataFromInscription.getUsersInscriptions()
+    // console.log(this.suscriptionsList)
+    this.dataFromInscription.getData()
   }
 
 }
