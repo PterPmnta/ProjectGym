@@ -13,9 +13,9 @@
 
   <tbody>
     <tr style="cursor: pointer;" *ngFor="let suscription of suscriptionsList">
-      <th class="col-5" scope="row"> {{suscription.client.Nombre}} {{suscription.client.Apellido}} </th>
-      <td> {{suscription.StartDate.seconds * 1000 | date: 'yyyy-MM-dd'}} </td>
-      <td> {{suscription.EndDate.seconds * 1000 | date: 'yyyy-MM-dd'}}</td>
+      <th class="col-5" scope="row"> {{suscription.client?.Nombre}} {{suscription.client?.Apellido}} </th>
+      <td> {{suscription.StartDate | date: 'yyyy-MM-dd'}} </td>
+      <td> {{suscription.EndDate | date: 'yyyy-MM-dd'}}</td>
       <td> {{suscription.PayInscription}} </td>
     </tr>
   </tbody>
